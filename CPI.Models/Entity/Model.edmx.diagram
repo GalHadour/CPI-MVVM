@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5108f8b1ebe4eddafcd3ba3aae680a3" Name="Diagram1">
+        <EntityTypeShape EntityType="CPI_DBModel.ARFCN" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CPI_DBModel.Computer" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CPI_DBModel.License" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CPI_DBModel.Provider" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CPI_DBModel.Setting" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CPI_DBModel.Unit" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CPI_DBModel.User" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="CPI_DBModel.Foreign_Key_Provider_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="CPI_DBModel.Foreign_Key_Unit_ID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CPI_DBModel.Call" Width="1.5" PointX="10.875" PointY="1.75" />
+        <EntityTypeShape EntityType="CPI_DBModel.SMS" Width="1.5" PointX="13.375" PointY="0.875" />
+        <AssociationConnector Association="CPI_DBModel.Foreign_Key_ARFCN_ID" />
+        <AssociationConnector Association="CPI_DBModel.Foreign_Key_SMS_ARFCN_ID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

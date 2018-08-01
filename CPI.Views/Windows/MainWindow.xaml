@@ -1,0 +1,28 @@
+﻿<Controls:MetroWindow x:Class="CPI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Dialog:DialogParticipation.Register="{Binding}"
+        mc:Ignorable="d" 
+        Style="{StaticResource GeneralMetroWindowStyle}">
+    <Controls:MetroWindow.TitleTemplate>
+        <DataTemplate>
+            <TextBlock
+                Text="{DynamicResource MainWinTitle}"
+                Style="{StaticResource GeneralWindowTitleTemplate}"/>
+        </DataTemplate>
+    </Controls:MetroWindow.TitleTemplate>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <ContentControl Content="{Binding SelectedViewModel}"/>
+</Controls:MetroWindow>

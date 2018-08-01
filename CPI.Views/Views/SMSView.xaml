@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="CPI.Views.SMSView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CPI.Views"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"       
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+
+             mc:Ignorable="d"
+             Dialog:DialogParticipation.Register="{Binding}"
+             d:DesignHeight="800" d:DesignWidth="1500">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding Unloaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Background="{StaticResource MenuTabBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1" Background="{StaticResource GroupBoxBackground}" Margin="5">
+            <TextBlock Text="SEARCH" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" Margin="10,5,10,0" />
+            <Grid  Margin="10,5,10,10"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ComboBox  VerticalAlignment="Center" FontSize="16" Height="30" IsEditable="True"
+                           ItemsSource="{Binding Path=SearchHistory}" SelectedItem="{Binding Path=SearchWord}"/>
+
+                <Button Grid.Column="2" Width="30" Command="{Binding Path=Search}" 
+                        Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconMaterialKind.Magnify}}" />
+                <Button Grid.Column="4" Width="30" Command="{Binding Path=ResetSearch}" 
+                        Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconMaterialKind.Close}}" />
+                <StackPanel  Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,5,0,0">
+                    <RadioButton Content="SENDER" IsChecked="True"  VerticalAlignment="Center" FontSize="15" />
+                    <RadioButton Content="ARFCN" VerticalAlignment="Center" Margin="7,0" FontSize="15"/>
+                    <RadioButton Content="BAND" VerticalAlignment="Center" FontSize="15"/>
+                </StackPanel>
+
+            </Grid>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Background="{StaticResource GroupBoxBackground}"
+                  ItemsSource="{Binding Path=SMSs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="false" IsReadOnly="True"
+                  CanUserReorderColumns="False" CanUserSortColumns="True"  SelectedItem="{Binding SelectedSMS}" 
+                  ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" FontSize="15">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding SequenceNumber}"  Header="{iconPacks:Material Kind=Sort,Rotation=180}"  Width="50"/>
+                <DataGridTextColumn Binding="{Binding Sender}"          Header="SENDER"             Width="0.6*" />
+                <DataGridTextColumn Binding="{Binding Kc}"              Header="KC"                 Width=".6*" />
+                <DataGridTextColumn Binding="{Binding TS}"              Header="TS"                 Width="0.2*" />
+                <DataGridTextColumn Binding="{Binding TimeStamp}"       Header="DATE"               Width="0.8*" />
+                <DataGridTextColumn Binding="{Binding Length}"          Header="LENGTH"             Width="0.3*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

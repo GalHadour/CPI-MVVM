@@ -1,0 +1,854 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CPI_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARFCN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Chanel" Type="int" />
+          <Property Name="Band" Type="nvarchar" MaxLength="50" />
+          <Property Name="Frequency" Type="nvarchar" MaxLength="50" />
+          <Property Name="MCC" Type="int" />
+          <Property Name="MNC" Type="int" />
+          <Property Name="LAC" Type="int" />
+          <Property Name="CI" Type="int" />
+          <Property Name="Power" Type="int" />
+          <Property Name="ScramblingCode" Type="int" />
+          <Property Name="System" Type="nvarchar" MaxLength="50" />
+          <Property Name="Configuration" Type="nvarchar" MaxLength="500" />
+          <Property Name="CellARFCNs" Type="nvarchar" MaxLength="500" />
+          <Property Name="NeighbourCells" Type="nvarchar" MaxLength="500" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProviderID" Type="int" />
+        </EntityType>
+        <EntityType Name="Call">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Kc" Type="nvarchar" MaxLength="20" />
+          <Property Name="Codec" Type="nvarchar" MaxLength="10" />
+          <Property Name="Rate" Type="nvarchar" MaxLength="10" />
+          <Property Name="TS" Type="nvarchar" MaxLength="5" />
+          <Property Name="CallerNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CipherMode" Type="nvarchar" MaxLength="5" />
+          <Property Name="TMSI" Type="nvarchar" MaxLength="20" />
+          <Property Name="IMSI" Type="nvarchar" MaxLength="20" />
+          <Property Name="IMEI" Type="nvarchar" MaxLength="20" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Duration" Type="time" Precision="7" />
+          <Property Name="Size" Type="nvarchar" MaxLength="20" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ARFCNID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="System" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Power" Type="int" />
+          <Property Name="Receivers" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Unit_ID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="AuthorizationKey" Type="nvarchar" MaxLength="100" />
+          <Property Name="RegistrationNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="Period" Type="int" />
+          <Property Name="Start" Type="datetime" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="LastSession" Type="datetime" />
+          <Property Name="Summary" Type="text" />
+          <Property Name="Hash" Type="text" />
+          <Property Name="Directory" Type="nvarchar" MaxLength="100" />
+          <Property Name="Spare1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Spare2" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="MCC" Type="int" />
+          <Property Name="MNC" Type="int" />
+          <Property Name="Network" Type="text" />
+          <Property Name="Operator" Type="text" />
+          <Property Name="Status" Type="nvarchar" MaxLength="200" />
+          <Property Name="Country" Type="nvarchar" MaxLength="200" />
+          <Property Name="Logo" Type="text" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="text" />
+          <Property Name="NewValue" Type="text" />
+          <Property Name="OldValue" Type="text" />
+          <Property Name="DefaultValue" Type="text" />
+        </EntityType>
+        <EntityType Name="SMS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UnitName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Kc" Type="nvarchar" MaxLength="20" />
+          <Property Name="Rate" Type="nvarchar" MaxLength="10" />
+          <Property Name="TS" Type="nvarchar" MaxLength="5" />
+          <Property Name="SRI" Type="nvarchar" MaxLength="5" />
+          <Property Name="UDHI" Type="nvarchar" MaxLength="5" />
+          <Property Name="MMS" Type="nvarchar" MaxLength="5" />
+          <Property Name="PID" Type="nvarchar" MaxLength="5" />
+          <Property Name="DCS" Type="nvarchar" MaxLength="5" />
+          <Property Name="Class" Type="nvarchar" MaxLength="5" />
+          <Property Name="Alphabet" Type="nvarchar" MaxLength="20" />
+          <Property Name="Length" Type="nvarchar" MaxLength="10" />
+          <Property Name="TextType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sender" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMSC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CipherMode" Type="nvarchar" MaxLength="5" />
+          <Property Name="TMSI" Type="nvarchar" MaxLength="20" />
+          <Property Name="IMSI" Type="nvarchar" MaxLength="20" />
+          <Property Name="IMEI" Type="nvarchar" MaxLength="20" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="Message" Type="text" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ARFCNID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Permission" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="Foreign Key Call ARFCN ID">
+          <End Role="ARFCN" Type="Self.ARFCN" Multiplicity="0..1" />
+          <End Role="Call" Type="Self.Call" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARFCN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Call">
+              <PropertyRef Name="ARFCNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Foreign Key Provider ID">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="ARFCN" Type="Self.ARFCN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ARFCN">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Foreign Key SMS ARFCN ID">
+          <End Role="ARFCN" Type="Self.ARFCN" Multiplicity="0..1" />
+          <End Role="SMS" Type="Self.SMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARFCN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SMS">
+              <PropertyRef Name="ARFCNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Foreign Key Unit ID">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="Unit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_GetAllARFCNs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllCalls" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllComputers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllLicenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllSMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllUnit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetAllUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetLastLicense" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetProvider" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mcc" Type="int" Mode="In" />
+          <Parameter Name="mnc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetUserByUserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CPI_DBModelStoreContainer">
+          <EntitySet Name="ARFCN" EntityType="Self.ARFCN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Call" EntityType="Self.Call" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Computer" EntityType="Self.Computer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="License" EntityType="Self.License" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SMS" EntityType="Self.SMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Foreign Key Call ARFCN ID" Association="Self.Foreign Key Call ARFCN ID">
+            <End Role="ARFCN" EntitySet="ARFCN" />
+            <End Role="Call" EntitySet="Call" />
+          </AssociationSet>
+          <AssociationSet Name="Foreign Key Provider ID" Association="Self.Foreign Key Provider ID">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="ARFCN" EntitySet="ARFCN" />
+          </AssociationSet>
+          <AssociationSet Name="Foreign Key SMS ARFCN ID" Association="Self.Foreign Key SMS ARFCN ID">
+            <End Role="ARFCN" EntitySet="ARFCN" />
+            <End Role="SMS" EntitySet="SMS" />
+          </AssociationSet>
+          <AssociationSet Name="Foreign Key Unit ID" Association="Self.Foreign Key Unit ID">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Computer" EntitySet="Computer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CPI_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ARFCN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Chanel" Type="Int32" />
+          <Property Name="Band" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MCC" Type="Int32" />
+          <Property Name="MNC" Type="Int32" />
+          <Property Name="LAC" Type="Int32" />
+          <Property Name="CI" Type="Int32" />
+          <Property Name="Power" Type="Int32" />
+          <Property Name="ScramblingCode" Type="Int32" />
+          <Property Name="System" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Configuration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CellARFCNs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NeighbourCells" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderID" Type="Int32" />
+          <NavigationProperty Name="Provider" Relationship="Self.Foreign_Key_Provider_ID" FromRole="ARFCN" ToRole="Provider" />
+          <NavigationProperty Name="Calls" Relationship="CPI_DBModel.Foreign_Key_ARFCN_ID" FromRole="ARFCN" ToRole="Call" />
+          <NavigationProperty Name="SMS" Relationship="CPI_DBModel.Foreign_Key_SMS_ARFCN_ID" FromRole="ARFCN" ToRole="SM" />
+        </EntityType>
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="System" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Power" Type="Int32" />
+          <Property Name="Receivers" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Unit_ID" Type="Guid" />
+          <NavigationProperty Name="Unit" Relationship="Self.Foreign_Key_Unit_ID" FromRole="Computer" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorizationKey" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Period" Type="Int32" />
+          <Property Name="Start" Type="DateTime" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="LastSession" Type="DateTime" Precision="3" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Hash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Directory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Spare1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Spare2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="MCC" Type="Int32" />
+          <Property Name="MNC" Type="Int32" />
+          <Property Name="Network" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Operator" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ARFCNs" Relationship="Self.Foreign_Key_Provider_ID" FromRole="Provider" ToRole="ARFCN" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OldValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Computers" Relationship="Self.Foreign_Key_Unit_ID" FromRole="Unit" ToRole="Computer" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Permission" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="Foreign_Key_Provider_ID">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="ARFCN" Type="Self.ARFCN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ARFCN">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Foreign_Key_Unit_ID">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Computer" Type="Self.Computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Computer">
+              <PropertyRef Name="Unit_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ARFCNs" EntityType="Self.ARFCN" />
+          <EntitySet Name="Computers" EntityType="Self.Computer" />
+          <EntitySet Name="Licenses" EntityType="Self.License" />
+          <EntitySet Name="Providers" EntityType="Self.Provider" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="Foreign_Key_Provider_ID" Association="Self.Foreign_Key_Provider_ID">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="ARFCN" EntitySet="ARFCNs" />
+          </AssociationSet>
+          <AssociationSet Name="Foreign_Key_Unit_ID" Association="Self.Foreign_Key_Unit_ID">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="Computer" EntitySet="Computers" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetAllARFCNs" EntitySet="ARFCNs" ReturnType="Collection(CPI_DBModel.ARFCN)" />
+          <FunctionImport Name="sp_GetAllComputers" EntitySet="Computers" ReturnType="Collection(CPI_DBModel.Computer)" />
+          <FunctionImport Name="sp_GetAllLicenses" EntitySet="Licenses" ReturnType="Collection(CPI_DBModel.License)" />
+          <FunctionImport Name="sp_GetAllSettings" EntitySet="Settings" ReturnType="Collection(CPI_DBModel.Setting)" />
+          <FunctionImport Name="sp_GetAllUnit" EntitySet="Units" ReturnType="Collection(CPI_DBModel.Unit)" />
+          <FunctionImport Name="sp_GetAllUsers" EntitySet="Users" ReturnType="Collection(CPI_DBModel.User)" />
+          <FunctionImport Name="sp_GetLastLicense" EntitySet="Licenses" ReturnType="Collection(CPI_DBModel.License)" />
+          <FunctionImport Name="sp_GetProvider" EntitySet="Providers" ReturnType="Collection(CPI_DBModel.Provider)">
+            <Parameter Name="mcc" Mode="In" Type="Int32" />
+            <Parameter Name="mnc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetUserByUserName" EntitySet="Users" ReturnType="Collection(CPI_DBModel.User)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Calls" EntityType="CPI_DBModel.Call" />
+          <EntitySet Name="SMS" EntityType="CPI_DBModel.SMS" />
+          <AssociationSet Name="Foreign_Key_ARFCN_ID" Association="CPI_DBModel.Foreign_Key_ARFCN_ID">
+            <End Role="ARFCN" EntitySet="ARFCNs" />
+            <End Role="Call" EntitySet="Calls" />
+          </AssociationSet>
+          <AssociationSet Name="Foreign_Key_SMS_ARFCN_ID" Association="CPI_DBModel.Foreign_Key_SMS_ARFCN_ID">
+            <End Role="ARFCN" EntitySet="ARFCNs" />
+            <End Role="SM" EntitySet="SMS" />
+          </AssociationSet>
+          <FunctionImport Name="sp_GetAllCalls" EntitySet="Calls" ReturnType="Collection(CPI_DBModel.Call)" />
+          <FunctionImport Name="sp_GetAllSMS" EntitySet="SMS" ReturnType="Collection(CPI_DBModel.SMS)" />
+        </EntityContainer>
+        <ComplexType Name="sp_GetAllARFCNs_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Chanel" Nullable="true" />
+          <Property Type="String" Name="Band" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Frequency" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="MCC" Nullable="true" />
+          <Property Type="Int32" Name="MNC" Nullable="true" />
+          <Property Type="Int32" Name="LAC" Nullable="true" />
+          <Property Type="Int32" Name="CI" Nullable="true" />
+          <Property Type="Int32" Name="Power" Nullable="true" />
+          <Property Type="Int32" Name="ScramblingCode" Nullable="true" />
+          <Property Type="String" Name="System" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Configuration" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CellARFCNs" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NeighbourCells" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="ProviderID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllComputers_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="IP" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="System" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Power" Nullable="true" />
+          <Property Type="Int32" Name="Receivers" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Guid" Name="Unit_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllLicenses_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
+          <Property Type="String" Name="SerialNumber" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AuthorizationKey" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RegistrationNumber" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Period" Nullable="true" />
+          <Property Type="DateTime" Name="Start" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="End" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastSession" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Summary" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Hash" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Directory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Spare1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Spare2" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllSettings_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Key" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="NewValue" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="OldValue" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="DefaultValue" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllUnit_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllUsers_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Permission" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_GetLastLicense_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
+          <Property Type="String" Name="SerialNumber" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AuthorizationKey" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RegistrationNumber" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Period" Nullable="true" />
+          <Property Type="DateTime" Name="Start" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="End" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastSession" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Summary" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Hash" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Directory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Spare1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Spare2" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_GetProvider_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="MCC" Nullable="true" />
+          <Property Type="Int32" Name="MNC" Nullable="true" />
+          <Property Type="String" Name="Network" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Operator" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Logo" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetUserByUserName_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Permission" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <EntityType Name="Call">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="UnitName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Kc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Codec" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TS" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="CallerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CipherMode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="TMSI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IMSI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IMEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="Time" Precision="7" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ARFCNID" Type="Guid" />
+          <NavigationProperty Name="ARFCN" Relationship="CPI_DBModel.Foreign_Key_ARFCN_ID" FromRole="Call" ToRole="ARFCN" />
+          <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SMS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="UnitName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Kc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TS" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="SRI" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="UDHI" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="MMS" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="PID" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="DCS" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Alphabet" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TextType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMSC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CipherMode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="TMSI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IMSI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IMEI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ARFCNID" Type="Guid" />
+          <NavigationProperty Name="ARFCN" Relationship="CPI_DBModel.Foreign_Key_SMS_ARFCN_ID" FromRole="SM" ToRole="ARFCN" />
+        </EntityType>
+        <Association Name="Foreign_Key_ARFCN_ID">
+          <End Type="CPI_DBModel.ARFCN" Role="ARFCN" Multiplicity="0..1" />
+          <End Type="CPI_DBModel.Call" Role="Call" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARFCN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Call">
+              <PropertyRef Name="ARFCNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Foreign_Key_SMS_ARFCN_ID">
+          <End Type="CPI_DBModel.ARFCN" Role="ARFCN" Multiplicity="0..1" />
+          <End Type="CPI_DBModel.SMS" Role="SM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARFCN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SM">
+              <PropertyRef Name="ARFCNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_GetAllCalls_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UnitName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Kc" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Codec" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Rate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TS" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="CallerNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="CipherMode" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="TMSI" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IMSI" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IMEI" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+          <Property Type="Time" Name="Duration" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="Guid" Name="ARFCNID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetAllSMS_Result">
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UnitName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Kc" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Rate" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TS" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="SRI" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="UDHI" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="MMS" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PID" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="DCS" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Class" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Alphabet" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Length" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TextType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Sender" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SMSC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CipherMode" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="TMSI" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IMSI" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IMEI" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="TimeStamp" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Message" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="Guid" Name="ARFCNID" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CPI_DBModelStoreContainer" CdmEntityContainer="DBContext">
+          <EntitySetMapping Name="ARFCNs">
+            <EntityTypeMapping TypeName="CPI_DBModel.ARFCN">
+              <MappingFragment StoreEntitySet="ARFCN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Chanel" ColumnName="Chanel" />
+                <ScalarProperty Name="Band" ColumnName="Band" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="MCC" ColumnName="MCC" />
+                <ScalarProperty Name="MNC" ColumnName="MNC" />
+                <ScalarProperty Name="LAC" ColumnName="LAC" />
+                <ScalarProperty Name="CI" ColumnName="CI" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="ScramblingCode" ColumnName="ScramblingCode" />
+                <ScalarProperty Name="System" ColumnName="System" />
+                <ScalarProperty Name="Configuration" ColumnName="Configuration" />
+                <ScalarProperty Name="CellARFCNs" ColumnName="CellARFCNs" />
+                <ScalarProperty Name="NeighbourCells" ColumnName="NeighbourCells" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Computers">
+            <EntityTypeMapping TypeName="CPI_DBModel.Computer">
+              <MappingFragment StoreEntitySet="Computer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="System" ColumnName="System" />
+                <ScalarProperty Name="Power" ColumnName="Power" />
+                <ScalarProperty Name="Receivers" ColumnName="Receivers" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Unit_ID" ColumnName="Unit_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licenses">
+            <EntityTypeMapping TypeName="CPI_DBModel.License">
+              <MappingFragment StoreEntitySet="License">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="AuthorizationKey" ColumnName="AuthorizationKey" />
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="LastSession" ColumnName="LastSession" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="Directory" ColumnName="Directory" />
+                <ScalarProperty Name="Spare1" ColumnName="Spare1" />
+                <ScalarProperty Name="Spare2" ColumnName="Spare2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="CPI_DBModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MCC" ColumnName="MCC" />
+                <ScalarProperty Name="MNC" ColumnName="MNC" />
+                <ScalarProperty Name="Network" ColumnName="Network" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="CPI_DBModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="CPI_DBModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="CPI_DBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllARFCNs" FunctionName="CPI_DBModel.Store.sp_GetAllARFCNs">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllComputers" FunctionName="CPI_DBModel.Store.sp_GetAllComputers">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllLicenses" FunctionName="CPI_DBModel.Store.sp_GetAllLicenses">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllSettings" FunctionName="CPI_DBModel.Store.sp_GetAllSettings">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllUnit" FunctionName="CPI_DBModel.Store.sp_GetAllUnit">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllUsers" FunctionName="CPI_DBModel.Store.sp_GetAllUsers">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetLastLicense" FunctionName="CPI_DBModel.Store.sp_GetLastLicense">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetProvider" FunctionName="CPI_DBModel.Store.sp_GetProvider">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetUserByUserName" FunctionName="CPI_DBModel.Store.sp_GetUserByUserName">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Calls">
+            <EntityTypeMapping TypeName="CPI_DBModel.Call">
+              <MappingFragment StoreEntitySet="Call">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ARFCNID" ColumnName="ARFCNID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+                <ScalarProperty Name="IMSI" ColumnName="IMSI" />
+                <ScalarProperty Name="TMSI" ColumnName="TMSI" />
+                <ScalarProperty Name="CipherMode" ColumnName="CipherMode" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="CallerNumber" ColumnName="CallerNumber" />
+                <ScalarProperty Name="TS" ColumnName="TS" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Codec" ColumnName="Codec" />
+                <ScalarProperty Name="Kc" ColumnName="Kc" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SMS">
+            <EntityTypeMapping TypeName="CPI_DBModel.SMS">
+              <MappingFragment StoreEntitySet="SMS">
+                <ScalarProperty Name="ARFCNID" ColumnName="ARFCNID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="IMEI" ColumnName="IMEI" />
+                <ScalarProperty Name="IMSI" ColumnName="IMSI" />
+                <ScalarProperty Name="TMSI" ColumnName="TMSI" />
+                <ScalarProperty Name="CipherMode" ColumnName="CipherMode" />
+                <ScalarProperty Name="SMSC" ColumnName="SMSC" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="TextType" ColumnName="TextType" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Alphabet" ColumnName="Alphabet" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="DCS" ColumnName="DCS" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="MMS" ColumnName="MMS" />
+                <ScalarProperty Name="UDHI" ColumnName="UDHI" />
+                <ScalarProperty Name="SRI" ColumnName="SRI" />
+                <ScalarProperty Name="TS" ColumnName="TS" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Kc" ColumnName="Kc" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllCalls" FunctionName="CPI_DBModel.Store.sp_GetAllCalls">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetAllSMS" FunctionName="CPI_DBModel.Store.sp_GetAllSMS">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,53 @@
+﻿<Application 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CPI.Views"
+             xmlns:viewModels="clr-namespace:CPI.ViewModels;assembly=CPI.ViewModels"
+             x:Class="CPI.Views.App"
+             
+             StartupUri="Windows/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+
+
+
+            <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                <local:LoginView />
+            </DataTemplate>
+
+            <DataTemplate  DataType="{x:Type viewModels:MainViewModel}">
+                <local:MainView />
+            </DataTemplate>
+
+            <DataTemplate  DataType="{x:Type viewModels:RegistrationViewModel}">
+                <local:RegistrationView />
+            </DataTemplate>
+            
+
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary x:Name="MyLanguages" Source="/Languages/Interface_en.xaml"/>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Orange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml" />
+
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+
+
+            </ResourceDictionary.MergedDictionaries>
+
+
+           
+
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,16 @@
+TODO CPI PRJ:
+	UI:
+
+	- add listener port and BC IP to db
+	- save arfcn if did attach
+	- add providers
+
+	LINUX SCRIPTS:
+	+ add unique id for each record file
+	- add unique id, IMSI, TMSI, Cipher mode(A5.1 or other) for each audio/sms file
+	+ scrips get all files
+	+ change init file send only new audio or sms files
+	+ add to init file option to detect deleted file
+
+
+
