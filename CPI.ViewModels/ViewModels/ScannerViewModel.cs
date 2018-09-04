@@ -57,8 +57,8 @@ namespace CPI.ViewModels
         private ObservableCollection<Receiver> _RxList;
 
         private ObservableCollection<Session> _SessionsList;
-        //private Visibility _SaveVisi=Visibility.Collapsed;
-        //private Visibility _LoadVisi=Visibility.Collapsed;
+        //private Visibility _SaveVisi = Visibility.Collapsed;
+        //private Visibility _LoadVisi = Visibility.Collapsed;
         //private Visibility _WarningNSVisibility = Visibility.Collapsed;
         //private Visibility _DeleteAllSessionsVisibility = Visibility.Collapsed;
         //private Visibility _DelSelectedSessionVisibility = Visibility.Collapsed;
@@ -467,7 +467,7 @@ namespace CPI.ViewModels
             //Delete = new RelayCommand(OnDelete);
             Attach = new RelayCommand(OnAttach, CanAttach);
             SelectedUnit = new Unit();
-            SelectedUnit.Name = "UNIT1";
+         
         }
 
 
@@ -620,15 +620,22 @@ namespace CPI.ViewModels
         private void OnScan()
         {
             ListARFCNs.Clear();
+            TransferDB.ARFCNs.Clear();
+            SequencingService.SetCollectionSequence(TransferDB.ARFCNs);
+            SequencingService.SetCollectionSequence(ListARFCNs);
+            SelectedUnit =Units[0];
             UpdateBand();
             Computer cpu = Computers.FirstOrDefault(c => c.Unit_ID == SelectedUnit.ID);
+       
             if (Scanner.Start(cpu, 1, BroadcastIP, ScannerListenerPort, band, Gain, Speed, sample_rate, 0))
             {
+                IsCancelVisible = Visibility.Visible;
+                IsScanVisible = Visibility.Collapsed;
                 if (!listenerWorker.IsBusy)
                     listenerWorker.RunWorkerAsync(ScannerListenerPort);
                 IsEnabled = false;
-                IsScanVisible = Visibility.Collapsed;
-                IsCancelVisible = Visibility.Visible;
+             
+                
             }
         }
 
@@ -805,7 +812,7 @@ namespace CPI.ViewModels
                 }
 
                 SessionNameToSave = null;
-                //SaveVisibility = Visibility.Collapsed;
+                SaveVisibility = Visibility.Collapsed;
             }
         }
 
