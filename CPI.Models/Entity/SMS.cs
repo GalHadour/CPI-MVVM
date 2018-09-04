@@ -11,8 +11,8 @@ namespace CPI.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class SMS : ExtensionSMS, IEntityWithID
+    
+    public partial class SMS :ExtensionSMS, IEntityWithID
     {
         public System.Guid ID { get; set; }
         public string UnitName { get; set; }

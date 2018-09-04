@@ -19,6 +19,7 @@ namespace CPI.Models.Entity
         {
             this.Calls = new HashSet<Call>();
             this.SMS = new HashSet<SMS>();
+            this.Receivers = new HashSet<Receiver>();
         }
     
         public System.Guid ID { get; set; }
@@ -37,11 +38,15 @@ namespace CPI.Models.Entity
         public string NeighbourCells { get; set; }
         public string Notes { get; set; }
         public Nullable<int> ProviderID { get; set; }
+        public Nullable<System.Guid> Session_ID { get; set; }
     
         public virtual Provider Provider { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Call> Calls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SMS> SMS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Receiver> Receivers { get; set; }
+        public virtual Session Session { get; set; }
     }
 }

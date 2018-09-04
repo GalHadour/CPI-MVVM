@@ -32,7 +32,8 @@ namespace CPI.ViewModels
                     TransferDB.ARFCNs = new ObservableCollection<ARFCN>(collection[3] as List<ARFCN>);
                     TransferDB.Units = new ObservableCollection<Unit>(collection[4] as List<Unit>);
                     TransferDB.Computers = new ObservableCollection<Computer>(collection[5] as List<Computer>);
-
+                    TransferDB.Receivers = new ObservableCollection<Receiver>(collection[6] as List<Receiver>);
+                    TransferDB.SessionsList= new ObservableCollection<Session>(collection[7] as List<Session>);
                 }
             };
             worker.RunWorkerAsync();
@@ -73,7 +74,40 @@ namespace CPI.ViewModels
             return status;
         }
 
+        public static int AddUpdateARFCN()
+        {
+            return DatabaseService.AddOrUpdate(new List<ARFCN>(TransferDB.ARFCNs));
+        }
+
+        public static int AddUpdateSessions()
+        {
+            return DatabaseService.AddOrUpdate(new List<Session>(TransferDB.SessionsList));
+        }
+
+
+        public static void UpdateARFCNListBySession(Session SelectedSession)
+        {
+           
+            List<object> collection = (List<object>)DatabaseService.GetAllARFCNBySession(SelectedSession);
+            TransferDB.ARFCNs = new ObservableCollection<ARFCN>(collection[0] as List<ARFCN>);
+            
+            AddUpdateARFCN();///
+        }
+
+        public static void DeleteAllSessions()
+        {
+            foreach (Session session in TransferDB.SessionsList)
+            {
+                DatabaseService.Delete<Session>(session);
+            }
+        }
+
+        public static void DeleteSelectedSession(Session session)
+        {
+              DatabaseService.Delete<Session>(session);
+        }
 
         #endregion
+
     }
 }

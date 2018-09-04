@@ -18,6 +18,11 @@
         <EntityTypeShape EntityType="CPI_DBModel.SMS" Width="1.5" PointX="13.375" PointY="0.875" />
         <AssociationConnector Association="CPI_DBModel.Foreign_Key_ARFCN_ID" />
         <AssociationConnector Association="CPI_DBModel.Foreign_Key_SMS_ARFCN_ID" />
+        <EntityTypeShape EntityType="CPI_DBModel.Receiver" Width="1.5" PointX="7" PointY="6.375" />
+        <AssociationConnector Association="CPI_DBModel.Foreign_Key_ARFCN_ID1" />
+        <AssociationConnector Association="CPI_DBModel.Foreign_Key_Computer_ID" />
+        <EntityTypeShape EntityType="CPI_DBModel.Session" Width="1.5" PointX="3.375" PointY="8.875" />
+        <AssociationConnector Association="CPI_DBModel.Foreign_Key_Session_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

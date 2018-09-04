@@ -1,4 +1,4 @@
-﻿use [E:\ONEDRIVE\WORKPH\WORKPHANTOM\PROJECTSVS\CPI MVVM\CPI.SERVER\DATABASE\CPI_DB.MDF]
+﻿use [C:\Users\max\Desktop\CPI MVVM\CPI.Server\Database\CPI_DB.mdf]
 go
 
 ---------------------------------------------------------------------------------
@@ -195,15 +195,23 @@ create table [ARFCN] (
 	
 	[Notes]				nvarchar(1000),
 	[ProviderID]		int,
+	[Session_ID]		uniqueidentifier,
 
 	constraint [Primary Key ARFCN] primary key ([ID]),
 	constraint [Foreign Key Provider ID] foreign key ([ProviderID]) references [Provider] ([ID]),
+	constraint [Foreign Key Session ID] foreign key ([Session_ID]) references [Session] ([ID]),
 )
 go
 
 create procedure sp_GetAllARFCNs as
 	begin
 		select * from [ARFCN]
+	end
+GO
+
+create procedure sp_GetAllARFCNsBySession (@ID uniqueidentifier)as
+	begin
+		select * from [ARFCN] where [Session_ID]=@ID
 	end
 go
 
@@ -289,4 +297,47 @@ create procedure sp_GetAllSMS as
 	begin
 		select * from [SMS]
 	end
-go
+GO
+
+------------------------------------------------------------------------------------------
+----- Receiver
+create table [Receiver] (
+	[ID]			uniqueidentifier	default newsequentialid()	not null,
+	[Name]			nvarchar(100)	not null,
+	[ARFCN_ID]		uniqueidentifier,
+	[Comp_ID]		uniqueidentifier,
+
+	constraint	[Primary Key Receiver]	primary key ([ID]),
+	constraint	[Foreign Key Computer ID] foreign key ([Comp_ID]) references [Computer] ([ID]),
+	constraint	[Foreign Key ARFCN ID] foreign key ([ARFCN_ID]) references [ARFCN] ([ID]),
+)
+GO
+
+create procedure sp_GetAllReceivers as
+	begin
+		select * from [Receiver]
+	end
+GO
+
+
+
+------------------------------------------------------------------------------------------
+----- Session
+create table [Session] (
+	[ID]			uniqueidentifier	default newsequentialid()	not null,
+	[Name]			nvarchar(100)	not null,
+	[Date]			DATETIME,
+	[Notes]				nvarchar(1000),
+
+	constraint	[Primary Key Session]	primary key ([ID]),
+
+)
+GO
+
+ create procedure sp_GetAllSessions as
+	begin
+		select * from [Session]
+	end
+GO
+
+

@@ -307,7 +307,9 @@ namespace CPI.ViewModels
                         dbContext.sp_GetAllLicenses().ToList(),
                         dbContext.sp_GetAllARFCNs().ToList(),
                         dbContext.sp_GetAllUnit().ToList(),
-                        dbContext.sp_GetAllComputers().ToList()
+                        dbContext.sp_GetAllComputers().ToList(),
+                        dbContext.sp_GetAllReceivers().ToList(),
+                        dbContext.sp_GetAllSessions().ToList()
                     };
                     return stuff;
                 }
@@ -324,6 +326,38 @@ namespace CPI.ViewModels
 #endif
             }
         }
+
+
+        public static List<object> GetAllARFCNBySession(Session session)
+        {
+            try
+            {
+                using (var dbContext = new DBContext())
+                {
+                    dbContext.Configuration.ProxyCreationEnabled = false;
+                    List<object> ARFCNListBySession = new List<object>
+                    {
+                        dbContext.sp_GetAllARFCNsBySession(session.ID).ToList()
+                       
+                    };
+                    return ARFCNListBySession;
+                }
+            }
+#pragma warning disable 0168
+            catch (Exception ex)
+#pragma warning restore 0168
+            {
+#if (DEBUG)
+                throw;
+#else
+                MessageBox.Show(ex.Message);
+                return null;
+#endif
+            }
+        }
+
+
+    
 
         #endregion
 

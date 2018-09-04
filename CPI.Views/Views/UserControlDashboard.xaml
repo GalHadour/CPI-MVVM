@@ -1,0 +1,291 @@
+﻿<!--<UserControl x:Class="CPI.Views.Views.UserControlDashboard"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:gauge="clr-namespace:CircularGauge;assembly=CircularGauge"
+             xmlns:viewModel = "clr-namespace:CPI.ViewModels;assembly=CPI.ViewModels"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             
+             xmlns:local="clr-namespace:CPI.Views"
+             xmlns:i1="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid Margin="5" Background="{StaticResource GroupBoxBackground}" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <TextBlock Name="unitName"  Foreground="White" FontSize="20" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=UnitTextProperty}" />
+            <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.ColumnSpan="3"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Border Background="{StaticResource GroupBoxBackground}">
+                    <Border.ToolTip>
+                        <ToolTip Foreground="White" FontSize="14" Content="RECORDER"></ToolTip>
+                    </Border.ToolTip>
+                    <iconPacks:PackIconMaterial Kind="RecordRec" Width="22" Height="22" Foreground="{Binding Path=RecColor, FallbackValue=White}"/>
+                </Border>
+                <Border Background="{StaticResource GroupBoxBackground}" Margin="5,0,30,0">
+                    <Border.ToolTip>
+                        <ToolTip Foreground="White" FontSize="14" Content="INTERCEPTOR"></ToolTip>
+                    </Border.ToolTip>
+                    <iconPacks:PackIconMaterial Kind="ChartDonutVariant" Width="22" Height="22" Foreground="{Binding Path=IntColor, FallbackValue=white}"/>
+                </Border>
+                <Border Background="{StaticResource GroupBoxBackground}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseDown">
+                            <i1:InvokeCommandAction Command="{Binding ShowUnitDetails}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value="0.7"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Border.ToolTip>
+                        <ToolTip Foreground="White" FontSize="14" Content="SETUP"></ToolTip>
+                    </Border.ToolTip>
+                    <iconPacks:PackIconMaterial Kind="Tune" Width="16" Height="22" Foreground="White"/>
+                </Border>
+
+            </StackPanel>
+
+            <Grid Grid.Column="1" Grid.Row="1" Background="#FF2F2F2F" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Path=ARFCN1.Channel, FallbackValue=89}" FontSize="18" Margin="10,2,0,0" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="425 01" FontSize="16"  Margin="10,0,0,0" Grid.Column="0" Grid.Row="1" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="GSM900" FontSize="16"  Margin="10,0,0,2" Grid.Column="0" Grid.Row="2" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="3" Grid.Row="1" Background="#FF2F2F2F" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="93" FontSize="18" Margin="10,2,0,0" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="425 01" FontSize="16"  Margin="10,0,0,0" Grid.Column="0" Grid.Row="1" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="GSM900" FontSize="16"  Margin="10,0,0,2" Grid.Column="0" Grid.Row="2" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="5" Grid.Row="1" Background="#FF2F2F2F" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="109" FontSize="18" Margin="10,2,0,0" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="425 01" FontSize="16"  Margin="10,0,0,0" Grid.Column="0" Grid.Row="1" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="GSM900" FontSize="16"  Margin="10,0,0,2" Grid.Column="0" Grid.Row="2" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Grid.Column="7" Grid.Row="1" Background="#FF2F2F2F" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="103" FontSize="18" Margin="10,2,0,0" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="425 01" FontSize="16"  Margin="10,0,0,0" Grid.Column="0" Grid.Row="1" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBlock Text="GSM900" FontSize="16"  Margin="10,0,0,2" Grid.Column="0" Grid.Row="2" Foreground="#FFFFFEFE" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+
+            <gauge:CircularGaugeControl 
+                    Grid.Row="2" Grid.Column="1"  
+                    Style="{DynamicResource TempCurrentGaugeStyle}" CurrentValue="{Binding CPU1}" 
+                    
+                    Radius="70" 
+                    ScaleStartAngle="135" 
+                    ScaleSweepAngle="270"
+                                                    
+                    PointerLength="37" 
+                    PointerCapRadius="11"
+                    PointerThickness ="3"
+
+                    MinValue="0" 
+                    MaxValue="100" 
+                    MajorDivisionsCount="6" 
+                                        
+                    OptimalRangeStartValue="80"                                      
+                    OptimalRangeEndValue="90"
+                                                    
+                    RangeIndicatorThickness="8"
+                    RangeIndicatorRadius="50"                                                    
+                    ScaleLabelFontSize="12"
+                                                    
+                    DialTextOffset="45"
+                    DialText="CPU 1" FontSize="16"
+                  />
+            <gauge:CircularGaugeControl 
+                    
+                    Grid.Row="2" Grid.Column="3"  
+                    Style="{DynamicResource TempCurrentGaugeStyle}" CurrentValue="{Binding CPU2}" 
+                    
+                    Radius="70" 
+                    ScaleStartAngle="135" 
+                    ScaleSweepAngle="270"
+                                                    
+                    PointerLength="37" 
+                    PointerCapRadius="11"
+                    PointerThickness ="3"
+
+                    MinValue="0" 
+                    MaxValue="100" 
+                    MajorDivisionsCount="6" 
+                                        
+                    OptimalRangeStartValue="80"                                      
+                    OptimalRangeEndValue="90"
+                                                    
+                    RangeIndicatorThickness="8"
+                    RangeIndicatorRadius="50"                                                    
+                    ScaleLabelFontSize="12"
+                                                    
+                    DialTextOffset="45"
+                    DialText="CPU 2" FontSize="16"
+                  />
+            <gauge:CircularGaugeControl 
+                    Grid.Row="2" Grid.Column="5"  
+                    Style="{DynamicResource TempCurrentGaugeStyle}" CurrentValue="{Binding Temp1}" 
+                    
+                    Radius="70" 
+                    ScaleStartAngle="135" 
+                    ScaleSweepAngle="270"
+                                                    
+                    PointerLength="37" 
+                    PointerCapRadius="11"
+                    PointerThickness ="3"
+
+                    MinValue="0" 
+                    MaxValue="90" 
+                    MajorDivisionsCount="6" 
+                                        
+                    OptimalRangeStartValue="60"                                      
+                    OptimalRangeEndValue="75"
+                                                    
+                    RangeIndicatorThickness="8"
+                    RangeIndicatorRadius="50"                                                    
+                    ScaleLabelFontSize="12"
+                                                    
+                    DialTextOffset="45"
+                    DialText="T1 C&#186;" FontSize="16"
+                  />
+            <gauge:CircularGaugeControl 
+                    Grid.Row="2" Grid.Column="7"  
+                    Style="{DynamicResource TempCurrentGaugeStyle}" CurrentValue="{Binding Temp2}" 
+                    
+                    Radius="70" 
+                    ScaleStartAngle="135" 
+                    ScaleSweepAngle="270"
+                                                    
+                    PointerLength="37" 
+                    PointerCapRadius="11"
+                    PointerThickness ="3"
+
+                    MinValue="0" 
+                    MaxValue="90" 
+                    MajorDivisionsCount="6" 
+                                        
+                    OptimalRangeStartValue="60"                                      
+                    OptimalRangeEndValue="75"
+                                                    
+                    RangeIndicatorThickness="8"
+                    RangeIndicatorRadius="50"                                                    
+                    ScaleLabelFontSize="12"
+                                                    
+                    DialTextOffset="45"
+                    DialText="T2 C&#186;" FontSize="16"
+                  />
+            <StackPanel Grid.Row="3" Grid.Column="1"  Background="#FF2F2F2F">
+                <Grid  Margin="10,5,10,10"  >
+                    <Grid.ColumnDefinitions>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="SCANNER"  Grid.Column="0" Grid.Row="0"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Bottom"/>
+
+
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="5" Background="#FF2F2F2F">
+                <Grid  Margin="10,5,10,10"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+
+
+                    <TextBlock Text="RECORDS"  Grid.Column="0" Grid.Row="0"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Bottom"/>
+                    <Controls:NumericUpDown Grid.Column="0" Grid.Row="1" Value="{Binding NOR}" Minimum ="1"  Maximum = "1000" Interval = "1" FontSize="16" Height="30" Background="#FF2F2F2F"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="LENGTH SEC"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}"  VerticalAlignment="Bottom"/>
+                    <Controls:NumericUpDown  Grid.Column="2" Grid.Row="1"  Value="{Binding RDS}" Minimum ="10"  Maximum = "3600" Interval = "10" FontSize="16" Height="30" Background="#FF2F2F2F"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="GAIN"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}"  VerticalAlignment="Bottom"/>
+                    <Controls:NumericUpDown  Grid.Column="4" Grid.Row="1"  Value="{Binding Gain}" Minimum ="10"  Maximum = "70" Interval = "1" FontSize="16" Height="30" Background="#FF2F2F2F"/>
+
+
+                    <Button  Grid.Column="6" Grid.Row="1" Content="START" Command="{Binding StartRec}" VerticalAlignment="Bottom"  Background="#FF2F2F2F" />
+                    <Button  Grid.Column="6" Grid.Row="1" Content="STOP" Command="{Binding StopRec}" VerticalAlignment="Bottom" Visibility="{Binding StopRecVisibility, FallbackValue=Collapsed}" Background="#FF2F2F2F"/>
+
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="7" VerticalAlignment="Bottom" Margin="-5,0,0,0"  >
+                        <Controls:ToggleSwitchButton Foreground="{DynamicResource MainForeground}" Width="50" Height="28" Margin="0,0,10,0"  IsChecked="{Binding Path=Loop}"/>
+                        <TextBlock Text="LOOP RECORDING" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="7" VerticalAlignment="Bottom" Margin="-5,-5,0,0"  >
+                        <Controls:ToggleSwitchButton Foreground="{DynamicResource MainForeground}" Width="50" Height="28" Margin="0,0,10,0"  IsChecked="{Binding Path=Loop}"/>
+                        <TextBlock Text="AUTO RUN INTERCEPTOR" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Center"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="7" VerticalAlignment="Bottom" Margin="-5,-5,0,-5"  >
+                        <Controls:ToggleSwitchButton Foreground="{DynamicResource MainForeground}" Width="50" Height="28" Margin="0,0,10,0"  IsChecked="{Binding Path=Loop}"/>
+                        <TextBlock Text="DELETE CFILE AFTER DECODING" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Center"  />
+                    </StackPanel>
+
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>-->

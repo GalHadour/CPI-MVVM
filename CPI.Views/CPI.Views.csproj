@@ -55,6 +55,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -158,6 +160,10 @@
     <ProjectReference Include="..\CircularGauge\CircularGauge.csproj">
       <Project>{6efd5895-177b-4bbb-af52-29f4d53b3fbd}</Project>
       <Name>CircularGauge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\Controls.csproj">
+      <Project>{556621f3-fc19-4a20-bc27-aeeab6bfcadb}</Project>
+      <Name>Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\CPI.DTO\CPI.DTO.csproj">
       <Project>{380c7305-ed98-415d-9809-6d93c675f4a4}</Project>

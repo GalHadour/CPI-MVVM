@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CPI.ViewModels.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace CPI.Views
         public SMSView()
         {
             InitializeComponent();
+            this.DataContext = new SMSViewModel();
         }
     }
 }

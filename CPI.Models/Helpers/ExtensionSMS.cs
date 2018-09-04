@@ -6,6 +6,8 @@ namespace CPI.Models
     public class ExtensionSMS : ISequencedObject, INotifyPropertyChanged
     {
         private int _sequenceNumber;
+       
+      
 
         public int SequenceNumber
         {
@@ -17,7 +19,7 @@ namespace CPI.Models
             }
         }
 
-        public string FileName { get; set; }
+        public string FileName {get;set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

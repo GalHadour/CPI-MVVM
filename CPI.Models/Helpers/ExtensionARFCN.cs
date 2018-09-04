@@ -5,6 +5,7 @@ namespace CPI.Models
     public class ExtensionARFCN : ISequencedObject, INotifyPropertyChanged
     {
         private int _sequenceNumber;
+        private string _RxName;
 
         public int SequenceNumber
         {
@@ -13,6 +14,16 @@ namespace CPI.Models
             {
                 _sequenceNumber = value;
                 OnPropertyChanged("SequenceNumber");
+            }
+        }
+
+        public string RxName
+        {
+            get { return _RxName; }
+            set
+            {
+                _RxName = value;
+                OnPropertyChanged("RxName");
             }
         }
 

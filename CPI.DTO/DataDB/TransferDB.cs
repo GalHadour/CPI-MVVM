@@ -12,5 +12,9 @@ namespace CPI.DTO
         public static List<User> Users { get; set; }
         public static ObservableCollection<Unit> Units { get; set; }
         public static ObservableCollection<Computer> Computers { get; set; }
+        public static ObservableCollection<Receiver> Receivers { get; set; }
+
+        public static ObservableCollection<Session> SessionsList { get; set; }
+        
     }
 }

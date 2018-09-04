@@ -120,7 +120,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-              
+
                 <Button Content="DECODE" Command="{Binding Run}" HorizontalAlignment="Left" />
                 <Button Content="STOP" Command="{Binding StopInterceptor}" HorizontalAlignment="Left" Visibility="{Binding StopInterceptorVisibility, FallbackValue=Collapsed}"/>
                 <Button Grid.Row="1" Content="PLAY" Command="{Binding Play}" HorizontalAlignment="Left" Margin="0,5"/>
@@ -210,7 +210,7 @@
                             <ColumnDefinition Width="1.1*"/>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="auto"/>
-               
+
                             <ColumnDefinition Width="0"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>

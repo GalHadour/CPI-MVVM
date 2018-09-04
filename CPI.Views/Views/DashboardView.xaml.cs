@@ -1,4 +1,7 @@
 ﻿using System.Windows.Controls;
+using System.Windows;
+using Controls.ReceiverUnit;
+using CPI.ViewModels;
 
 namespace CPI.Views
 {
@@ -7,9 +10,14 @@ namespace CPI.Views
     /// </summary>
     public partial class DashboardView : UserControl
     {
+
         public DashboardView()
         {
             InitializeComponent();
+      
+            this.DataContext = new DashboardViewModel();
+
+
         }
     }
 }

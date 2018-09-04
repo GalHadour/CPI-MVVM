@@ -41,7 +41,7 @@ namespace CPI.ViewModels
             {
                 string command = String.Format("cd dev_utilities && ./receiver.sh -s {0}", indx);
                 shellStream.WriteLine(command);
-#if (DEBUG)
+#if DEBUG
                 string feedback = shellStream.Expect("root", new TimeSpan(0, 0, 10));
 #endif
                 sshClient.Disconnect();

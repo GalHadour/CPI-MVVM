@@ -11,9 +11,15 @@ namespace CPI.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-
-    public partial class Computer : IEntityWithID
+    
+    public partial class Computer: IEntityWithID
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Computer()
+        {
+            this.Receivers1 = new HashSet<Receiver>();
+        }
+    
         public System.Guid ID { get; set; }
         public string Name { get; set; }
         public string IP { get; set; }
@@ -26,5 +32,7 @@ namespace CPI.Models.Entity
         public Nullable<System.Guid> Unit_ID { get; set; }
     
         public virtual Unit Unit { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Receiver> Receivers1 { get; set; }
     }
 }

@@ -5,6 +5,7 @@ namespace CPI.Models
     public class ExtensionCall : ISequencedObject, INotifyPropertyChanged
     {
         private int _sequenceNumber;
+        
 
         public int SequenceNumber
         {
@@ -17,8 +18,7 @@ namespace CPI.Models
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-
+        //public string FileName { get; set; }
         protected void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)

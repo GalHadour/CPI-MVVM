@@ -55,9 +55,9 @@
                 <Button Grid.Column="4" Width="30" Command="{Binding Path=ResetSearch}" 
                         Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconMaterialKind.Close}}" />
                 <StackPanel  Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,5,0,0">
-                    <RadioButton Content="SENDER" IsChecked="True"  VerticalAlignment="Center" FontSize="15" />
-                    <RadioButton Content="ARFCN" VerticalAlignment="Center" Margin="7,0" FontSize="15"/>
-                    <RadioButton Content="BAND" VerticalAlignment="Center" FontSize="15"/>
+                    <RadioButton Content="SENDER"   VerticalAlignment="Center" FontSize="15" IsChecked="{Binding Path=Sender}"/>
+                    <RadioButton Content="ARFCN" VerticalAlignment="Center" Margin="7,0" FontSize="15" IsChecked="{Binding Path=ARFCN}"/>
+                    <RadioButton Content="BAND" VerticalAlignment="Center" FontSize="15" IsChecked="{Binding  Path=Band}"/>
                 </StackPanel>
 
             </Grid>

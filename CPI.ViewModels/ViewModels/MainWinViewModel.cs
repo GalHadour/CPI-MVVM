@@ -111,7 +111,7 @@ namespace CPI.ViewModels
             RegistryKey subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\PH Technologies\PH_RDR\PreviousSessionParameters");
             if (subKey != null)
             {
-                Localize.ChangeLanguage(subKey.GetValue("Language").ToString());
+                Localize.ChangeLanguage(subKey.GetValue("Language","en").ToString());
             }
 
         }

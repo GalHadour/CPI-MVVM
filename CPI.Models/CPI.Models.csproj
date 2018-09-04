@@ -80,10 +80,19 @@
     <Compile Include="Entity\Provider.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Receiver.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Session.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Setting.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\SMS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_GetAllARFCNsBySession_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sp_GetAllARFCNs_Result.cs">
@@ -96,6 +105,12 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sp_GetAllLicenses_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_GetAllReceivers_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_GetAllSessions_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sp_GetAllSettings_Result.cs">
@@ -128,13 +143,20 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Helpers\ExtensionARFCN.cs" />
     <Compile Include="Helpers\ExtensionCall.cs" />
+    <Compile Include="Helpers\ExtensionReceiver.cs" />
     <Compile Include="Helpers\ExtensionSMS.cs" />
     <Compile Include="Helpers\FingerPrint.cs" />
     <Compile Include="Interfaces\IEntityWithID.cs" />
     <Compile Include="Interfaces\ISequencedObject.cs" />
+    <Compile Include="ItemsInfo\CallsInfo.cs" />
+    <Compile Include="ItemsInfo\FilesInfo.cs" />
+    <Compile Include="ItemsInfo\RecordsInfo.cs" />
+    <Compile Include="ItemsInfo\SmsInfo.cs" />
     <Compile Include="Models\ListenerMessage.cs" />
     <Compile Include="Models\RecordFile.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\SystemStatus.cs" />
+    <Compile Include="Models\UnitView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

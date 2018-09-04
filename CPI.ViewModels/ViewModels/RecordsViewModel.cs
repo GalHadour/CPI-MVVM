@@ -18,12 +18,17 @@ using System.Windows;
 using Vlc.DotNet.Wpf;
 using System.Timers;
 using System.Windows.Media;
+using Controls.RecordsView;
 
 namespace CPI.ViewModels
 {
     public class RecordsViewModel : ViewModelBase
     {
-
+        //GAL
+        public RecordsViewTable recordsViewTableNewRecords { get;set; }
+        public RecordsViewTable recordsViewTableCalls { get; set; }
+        public RecordsViewTable recordsViewTableSms { get; set; }
+        //GAL
         #region Create Settings
 
         readonly string BroadcastIP = "255.255.255.255";
@@ -59,8 +64,10 @@ namespace CPI.ViewModels
         private Visibility _StopRecVisibility = Visibility.Collapsed;
         private Visibility _StopInterceptorVisibility = Visibility.Collapsed;
 
-
-
+        private Visibility _StopScanVisibility = Visibility.Collapsed;
+        private bool _LoopRec = false;
+        private bool _AutoRunInter = false;
+        private bool _DelCfile = false;
 
 
         #endregion
@@ -74,6 +81,48 @@ namespace CPI.ViewModels
             {
                 _NOR = value;
                 OnPropertyChanged("NOR");
+            }
+        }
+
+
+      
+        public bool LoopRec
+        {
+            get { return _LoopRec; }
+            set
+            {
+                _LoopRec = value;
+                OnPropertyChanged("LoopRec");
+            }
+        }
+
+        public bool AutoRunInter
+        {
+            get { return _AutoRunInter; }
+            set
+            {
+                _AutoRunInter = value;
+                OnPropertyChanged("AutoRunInter");
+            }
+        }
+
+        public bool DelCfile
+        {
+            get { return _DelCfile; }
+            set
+            {
+                _DelCfile = value;
+                OnPropertyChanged("DelCfile");
+            }
+        }
+
+        public Visibility StopScanVisibility
+        {
+            get { return _StopScanVisibility; }
+            set
+            {
+                _StopScanVisibility = value;
+                OnPropertyChanged("StopScanVisibility");
             }
         }
         public int RDS
@@ -252,7 +301,6 @@ namespace CPI.ViewModels
             Close = new RelayCommand(OnClose);
             ShowSMSData = new RelayCommand(OnShowSMSData);
             StopInterceptor = new RelayCommand(OnStopInterceptor);
-
             DeleteTest = new RelayCommand(OnDeleteTest);
 
 
@@ -262,12 +310,20 @@ namespace CPI.ViewModels
             listenerWorker.RunWorkerCompleted += ListenerWorker_RunWorkerCompleted;
             listenerWorker.WorkerReportsProgress = true;
             listenerWorker.WorkerSupportsCancellation = true;
+            InitializeRecordsViewTable();
+      
+
 
         }
 
-        private void OnDeleteTest()
+        public void InitializeRecordsViewTable()
         {
-            RecordFiles.Remove(SelectedRecordFile);
+            recordsViewTableNewRecords = new RecordsViewTable();
+            recordsViewTableNewRecords.RecordsViewName = "NEW RECORDS";
+            recordsViewTableCalls = new RecordsViewTable();
+            recordsViewTableCalls.RecordsViewName = "CALLS";
+            recordsViewTableSms = new RecordsViewTable();
+            recordsViewTableSms.RecordsViewName = "SMS";
         }
 
         public void Initialized()
@@ -293,7 +349,10 @@ namespace CPI.ViewModels
         #endregion
 
         #region Commands Methods
-
+        private void OnDeleteTest()
+        {
+            RecordFiles.Remove(SelectedRecordFile);
+        }
         private void OnStopInterceptor()
         {
             Computer cpu = computers.FirstOrDefault(c => c.Unit_ID == Transfer.SelectedUnit.ID);

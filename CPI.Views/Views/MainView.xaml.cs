@@ -27,5 +27,10 @@ namespace CPI.Views
             InitializeComponent();
             Transfer.HamburgerMenuControl = HamburgerMenuControl;
         }
+
+        private void DashboardView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -36,6 +36,8 @@ namespace CPI.Models.Entity
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Call> Calls { get; set; }
         public virtual DbSet<SMS> SMS { get; set; }
+        public virtual DbSet<Receiver> Receivers { get; set; }
+        public virtual DbSet<Session> Sessions { get; set; }
     
         public virtual ObjectResult<ARFCN> sp_GetAllARFCNs()
         {
@@ -169,6 +171,44 @@ namespace CPI.Models.Entity
         public virtual ObjectResult<SMS> sp_GetAllSMS(MergeOption mergeOption)
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SMS>("sp_GetAllSMS", mergeOption);
+        }
+    
+        public virtual ObjectResult<Receiver> sp_GetAllReceivers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Receiver>("sp_GetAllReceivers");
+        }
+    
+        public virtual ObjectResult<Receiver> sp_GetAllReceivers(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Receiver>("sp_GetAllReceivers", mergeOption);
+        }
+    
+        public virtual ObjectResult<ARFCN> sp_GetAllARFCNsBySession(Nullable<System.Guid> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ARFCN>("sp_GetAllARFCNsBySession", iDParameter);
+        }
+    
+        public virtual ObjectResult<ARFCN> sp_GetAllARFCNsBySession(Nullable<System.Guid> iD, MergeOption mergeOption)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ARFCN>("sp_GetAllARFCNsBySession", mergeOption, iDParameter);
+        }
+    
+        public virtual ObjectResult<Session> sp_GetAllSessions()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Session>("sp_GetAllSessions");
+        }
+    
+        public virtual ObjectResult<Session> sp_GetAllSessions(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Session>("sp_GetAllSessions", mergeOption);
         }
     }
 }

@@ -45,6 +45,10 @@
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=2.3.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MahApps.Metro.IconPacks.2.3.0\lib\net46\MahApps.Metro.IconPacks.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Renci.SshNet">
@@ -90,6 +94,7 @@
     <Compile Include="Services\DatabaseService.cs" />
     <Compile Include="Services\SequencingService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\CallsViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -99,12 +104,17 @@
     <Compile Include="ViewModels\RecordsViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\ScannerViewModel.cs" />
+    <Compile Include="ViewModels\SMSViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Controls\Controls.csproj">
+      <Project>{556621F3-FC19-4A20-BC27-AEEAB6BFCADB}</Project>
+      <Name>Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CPI.DTO\CPI.DTO.csproj">
       <Project>{380c7305-ed98-415d-9809-6d93c675f4a4}</Project>
       <Name>CPI.DTO</Name>

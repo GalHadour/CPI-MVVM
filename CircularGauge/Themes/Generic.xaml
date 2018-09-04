@@ -148,7 +148,7 @@
                                 </LinearGradientBrush>
                             </Path.Fill>
                         </Path>
-
+            
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

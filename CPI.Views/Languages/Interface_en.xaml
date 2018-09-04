@@ -40,6 +40,7 @@
     <sys:String x:Key="NeighbourCells">NEIGHBOUR CELLS</sys:String>
     <sys:String x:Key="NetworkProvider">NETWORK PROVIDER</sys:String>
     <sys:String x:Key="Country">COUNTRY</sys:String>
+    <sys:String x:Key="Receiver">RECEIVER</sys:String>
     <sys:String x:Key="Close">CLOSE</sys:String>
     <sys:String x:Key="Operator">OPERATOR OR BRAND NAME</sys:String>
     <sys:String x:Key="ProviderLogo">PROVIDER LOGO</sys:String>

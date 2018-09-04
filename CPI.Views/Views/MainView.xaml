@@ -62,7 +62,7 @@
                         Icon="{iconPacks:Material Apps}"  
                         ToolTip="{DynamicResource DASHBOARD}" Label="{DynamicResource DASHBOARD}" >
                         <local:CustomMenuIconItem.Tag>
-                            <local:DashboardView/>
+                            <local:DashboardView Loaded="DashboardView_Loaded"/>
                         </local:CustomMenuIconItem.Tag>
                     </local:CustomMenuIconItem>
                     
@@ -178,8 +178,8 @@
                 <ColumnDefinition Width="28"/>
                 <ColumnDefinition Width="28"/>
             </Grid.ColumnDefinitions>
-            <iconPacks:PackIconMaterial Grid.Column="0" Width="23" Height="23" Kind="Radar" Spin="{Binding Path=IsScannerSpin}" Foreground="{Binding Path=ScannColor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <iconPacks:PackIconMaterial Grid.Column="1" Width="23" Height="23" Kind="RecordRec"         Foreground="{Binding Path=RecColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <iconPacks:PackIconMaterial Grid.Column="0" Width="23" Height="23" Kind="Radar" Spin="{Binding Path=IsScannerSpin}" Foreground="{Binding Path=ScannColor, FallbackValue=Gray}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <iconPacks:PackIconMaterial Grid.Column="1" Width="23" Height="23" Kind="RecordRec"         Foreground="{Binding Path=RecColor, FallbackValue=Gray}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <iconPacks:PackIconMaterial Grid.Column="2" Width="23" Height="23" Kind="ChartDonutVariant" Spin="{Binding Path=IsInterceptorSpin}"  Foreground="{Binding Path=IntColor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <iconPacks:PackIconMaterial Grid.Column="4" Width="20" Height="23" Kind="PhonePlus"        Foreground="{Binding Path=CallColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <iconPacks:PackIconMaterial Grid.Column="5" Width="22" Height="23" Kind="EmailOpen"         Foreground="{Binding Path=SmsColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>

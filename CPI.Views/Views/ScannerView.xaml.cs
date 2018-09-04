@@ -15,8 +15,10 @@ namespace CPI.Views
         {
             InitializeComponent();
             DataContext = ViewModel;
-
+          
             ViewModel.Initialized();
         }
+
+    
     }
 }

@@ -11,7 +11,7 @@ namespace CPI.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class License : IEntityWithID
     {
         public System.Guid ID { get; set; }
