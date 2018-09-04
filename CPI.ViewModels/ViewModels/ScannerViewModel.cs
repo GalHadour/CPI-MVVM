@@ -847,7 +847,6 @@ namespace CPI.ViewModels
                     OnPropertyChanged("ListARFCNs");
                 }
 
-                //LoadVisibility = Visibility.Collapsed;
             }
         }
 
