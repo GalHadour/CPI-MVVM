@@ -535,6 +535,7 @@ namespace CPI.ViewModels
         {
             Transfer.SelectedARFCN = SelectedARFCN;
 
+
             if (SelectedReceiver.Name == "NS" && !string.IsNullOrEmpty(SelectedARFCN.RxName))
             {
                 _RxList.FirstOrDefault(d => d.Name == SelectedARFCN.RxName).ARFCN_ID = null;
@@ -554,7 +555,7 @@ namespace CPI.ViewModels
                 SelectedARFCN.RxName = SelectedReceiver.Name;
             }
             MoreVisibility = Visibility.Collapsed;
-            //SelectedReceiver = null;
+            SelectedReceiver = null;
             OnPropertyChanged("RxList");
         }
 
@@ -586,11 +587,11 @@ namespace CPI.ViewModels
                     //SelectedReceiver = _RxList.FirstOrDefault(d => d.IsAttached == true);
                     // SelectedReceiver.ARFCN = SelectedARFCN;
 
-                    Receiver r = _RxList.FirstOrDefault(d => d.ARFCN_ID == SelectedARFCN.ID);//TODO
+                    //Receiver r = _RxList.FirstOrDefault(d => d.ARFCN_ID == SelectedARFCN.ID);//TODO
 
-                    SelectedReceiver = r;
+                    //SelectedReceiver = r;
 
-                    //SelectedReceiver = _RxList.FirstOrDefault(d => d.Name == SelectedARFCN.RxName);
+                    SelectedReceiver = _RxList.FirstOrDefault(d => d.Name == SelectedARFCN.RxName);
 
                     //TODO: Add IsAttached property to the receiver extension and continue with this parameter to hide receiver from RxList 
                 }
