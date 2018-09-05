@@ -51,6 +51,7 @@ namespace CPI.ViewModels
         private BackgroundWorker listenerWorker;
         private ObservableCollection<ARFCN> _ListARFCNs;
         private bool _IsEnabled;
+        private bool _IsEnabledSession=true;
         private UdpClient listener;
         private Visibility _MoreVisibility;
         private Receiver _SelectedReceiver;
@@ -262,8 +263,18 @@ namespace CPI.ViewModels
                 OnPropertyChanged("IsEnabled");
             }
         }
-        
 
+        public bool IsEnabledSession
+        {
+            get { return _IsEnabledSession; }
+            set
+            {
+                _IsEnabledSession = value;
+                OnPropertyChanged("IsEnabledSession");
+            }
+        }
+
+        
         public Unit SelectedUnit
         {
             get { return _SelectedUnit; }
@@ -459,7 +470,7 @@ namespace CPI.ViewModels
             //Loaded = new RelayCommand(OnLoaded);
             //Unloaded = new RelayCommand(OnUnloaded);
             Scan = new RelayCommand(OnScan, CanScan);
-            Cancel = new RelayCommand(OnCancel);
+            Cancel = new RelayCommand(OnCancel,CanCancel);
             //History = new RelayCommand(OnHistory);
             //AddNew = new RelayCommand(OnAddNew);
             ShowARFCN = new RelayCommand(OnShowARFCN);
@@ -621,21 +632,22 @@ namespace CPI.ViewModels
         {
             ListARFCNs.Clear();
             TransferDB.ARFCNs.Clear();
-            SequencingService.SetCollectionSequence(TransferDB.ARFCNs);
-            SequencingService.SetCollectionSequence(ListARFCNs);
+        
+
             SelectedUnit =Units[0];
             UpdateBand();
             Computer cpu = Computers.FirstOrDefault(c => c.Unit_ID == SelectedUnit.ID);
        
             if (Scanner.Start(cpu, 1, BroadcastIP, ScannerListenerPort, band, Gain, Speed, sample_rate, 0))
             {
-                IsCancelVisible = Visibility.Visible;
+              
                 IsScanVisible = Visibility.Collapsed;
+                IsCancelVisible = Visibility.Visible;
+                Cancel.RaiseCanExecuteChanged();
                 if (!listenerWorker.IsBusy)
                     listenerWorker.RunWorkerAsync(ScannerListenerPort);
                 IsEnabled = false;
-             
-                
+                IsEnabledSession = false;
             }
         }
 
@@ -664,6 +676,10 @@ namespace CPI.ViewModels
             return (!string.IsNullOrEmpty(SessionNameToSave));        
         }
 
+        private bool CanCancel()
+        {
+            return IsScanVisible == Visibility.Collapsed;
+        }
         //private void OnLoad()
         //{
         //    LoadVisibility = Visibility.Visible;
@@ -941,6 +957,7 @@ namespace CPI.ViewModels
         private void ListenerWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             IsEnabled = true;
+            IsEnabledSession = true;
             IsScanVisible = Visibility.Visible;
             IsCancelVisible = Visibility.Collapsed;
         }

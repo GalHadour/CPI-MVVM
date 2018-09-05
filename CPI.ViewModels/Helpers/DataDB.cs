@@ -81,6 +81,7 @@ namespace CPI.ViewModels
 
         public static int AddUpdateSessions()
         {
+            
             return DatabaseService.AddOrUpdate(new List<Session>(TransferDB.SessionsList));
         }
 
