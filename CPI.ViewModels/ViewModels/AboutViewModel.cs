@@ -60,7 +60,7 @@ namespace CPI.ViewModels
             }
         }
 
-        public string VideoMachineId { get { return Transfer.VideoMachineId; } }
+   
 
         public RelayCommand LoadedCommand { get; set; }
         public RelayCommand UnloadedCommand { get; set; }

@@ -45,9 +45,7 @@
         <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"  Text="{Binding PCinfo}"         Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Top" Margin="0,5,0,0"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Text="{DynamicResource LICENSE}" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Bottom" FontSize="25"/>
         <TextBlock Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding License}"        Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Top" Margin="0,5,0,0"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Text="VIDEO TRACKER ID" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Bottom" FontSize="25"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Text="{Binding VideoMachineId}"        Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Top" Margin="0,5,0,0"/>
-
+     
         <TextBlock Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" Text="{DynamicResource Product}" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Bottom" FontSize="25"/>
         <StackPanel Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0,5,0,0" HorizontalAlignment="Left">
             <StackPanel  Orientation="Horizontal"  Margin="0,5" VerticalAlignment="Top" HorizontalAlignment="Left">
