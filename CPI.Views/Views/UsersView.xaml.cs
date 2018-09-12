@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CPI.ViewModels;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,11 @@ namespace CPI.Views
     /// </summary>
     public partial class UsersView : UserControl
     {
+        UsersViewModel viewModel = new UsersViewModel(DialogCoordinator.Instance);
         public UsersView()
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

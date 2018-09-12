@@ -158,9 +158,9 @@
 
 
     <!--About View-->
-    <sys:String x:Key="PCINFO">PC INFO</sys:String>
+    <sys:String x:Key="PCinfo">PC INFO</sys:String>
     <sys:String x:Key="LICENSE">LICENSE</sys:String>
-    <sys:String x:Key="PRODUCT">PRODUCT</sys:String>
+    <sys:String x:Key="Product">PRODUCT</sys:String>
 
     <!--Settings View-->
     <sys:String x:Key="Language">Language</sys:String>

@@ -1,4 +1,4 @@
-﻿use [C:\Users\max\Desktop\CPI MVVM\CPI.Server\Database\CPI_DB.mdf]
+﻿use [E:\Downloads\CPI MVVM\CPI.Server\Database\CPI_DB.mdf]
 go
 
 ---------------------------------------------------------------------------------
@@ -339,5 +339,6 @@ GO
 		select * from [Session]
 	end
 GO
+
 
 

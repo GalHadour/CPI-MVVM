@@ -37,6 +37,8 @@ namespace Controls.ReceiverUnit
 
         private Visibility _StopScanVisibility = Visibility.Collapsed;
         private Visibility _StopReceiverVisibility = Visibility.Collapsed;
+        private Visibility _StartScanVisibility = Visibility.Visible;
+        private Visibility _StartReceiverVisibility = Visibility.Visible;
         #endregion
 
         #region Properties
@@ -109,8 +111,26 @@ namespace Controls.ReceiverUnit
                 OnPropertyChanged("StopReceiverVisibility");
             }
         }
+        public Visibility StartReceiverVisibility
+        {
+            get { return _StartReceiverVisibility; }
+            set
+            {
+                _StartReceiverVisibility = value;
+                OnPropertyChanged("StartReceiverVisibility");
+            }
+        }
 
-       
+        public Visibility StartScanVisibility
+        {
+            get { return _StartScanVisibility; }
+            set
+            {
+                _StartScanVisibility = value;
+                OnPropertyChanged("StartScanVisibility");
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -143,9 +163,12 @@ namespace Controls.ReceiverUnit
 
             Computer cpu = computers.FirstOrDefault(c => c.Unit_ID == Transfer.SelectedUnit.ID);
             ARFCN arfcn = Transfer.SelectedARFCN;
-            int mood = Loop? 1 : 0;
+            int mood = Loop ? 1 : 0;
             if (Recorder.Start(cpu, 1, arfcn.Band, arfcn.Chanel.Value, Convert.ToDouble(arfcn.Frequency) * 1000000, Gain, 400000, Length, NOR, mood, path))
-                StopReceiverVisibility = Visibility.Visible;
+            {
+                StopReceiverVisibility = Visibility.Visible;//TODO  visible and collapsed both buttons at the end of the record
+                StartReceiverVisibility = Visibility.Collapsed;
+            }
         }
         private void OnStopReceiver()
         {
@@ -154,7 +177,10 @@ namespace Controls.ReceiverUnit
 
             Computer cpu = computers.FirstOrDefault(c => c.Unit_ID == Transfer.SelectedUnit.ID);
             if (Recorder.Stop(cpu, 1))
-                StopReceiverVisibility = Visibility.Collapsed;
+            {
+                StopReceiverVisibility = Visibility.Collapsed;//TODO  visible and collapsed both buttons at the end of the receiver
+                StartReceiverVisibility = Visibility.Visible;
+            }
         }
         private bool CanStartStopReceiver()
         {
@@ -171,6 +197,7 @@ namespace Controls.ReceiverUnit
             UnitView arfcn = Transfer.SelectedUnitView;
             int mood = Loop ? 1 : 0;
             IsEnabled = false;
+            StartScanVisibility = Visibility.Collapsed;
             StopScanVisibility = Visibility.Visible;
 
 
@@ -189,7 +216,7 @@ namespace Controls.ReceiverUnit
         {
             Computer cpu = computers.FirstOrDefault(c => c.Unit_ID == Transfer.SelectedUnit.ID);
             StopScanVisibility = Visibility.Collapsed;
-
+            StartScanVisibility = Visibility.Visible;
 
         }
         private bool CanStartStopScan()

@@ -1,4 +1,5 @@
 ﻿using CPI.ViewModels;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,16 @@ using System.Windows.Shapes;
 namespace CPI.Views
 {
     /// <summary>
-    /// Interaction logic for SMSView.xaml
+    /// Interaction logic for SettingsView.xaml
     /// </summary>
-    public partial class SMSView : UserControl
+    public partial class SettingsView : UserControl
     {
-        public SMSView()
+        SettingsViewModel ViewModel = new SettingsViewModel(DialogCoordinator.Instance);
+        public SettingsView()
         {
             InitializeComponent();
-            this.DataContext = new SMSViewModel();
+            DataContext = ViewModel;
         }
+
     }
 }

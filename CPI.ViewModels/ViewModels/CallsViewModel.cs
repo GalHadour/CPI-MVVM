@@ -1,17 +1,22 @@
-﻿using System;
+﻿using CPI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CPI.ViewModels.ViewModels
+namespace CPIViewModels
 {
-   public class CallsViewModel
+   public class CallsViewModel: ViewModelBase
     {
+        #region Fields
         private bool _Caller;
         private bool _Band;
         private bool _ARFCN;
+        #endregion
+
+        #region Properties
         public bool Caller
         {
             get { return _Caller; }
@@ -47,11 +52,12 @@ namespace CPI.ViewModels.ViewModels
         {
             Caller = true;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+        #endregion
+
+        #region Constructor
+        #endregion
+
+        #region Commands Methods
+        #endregion
     }
 }

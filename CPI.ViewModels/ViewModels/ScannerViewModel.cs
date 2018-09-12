@@ -32,9 +32,6 @@ namespace CPI.ViewModels
 
         #region Fields
         private IDialogCoordinator dialogCoordinator;
-        private Visibility _IsCancelVisible = Visibility.Collapsed;
-        private Visibility _IsScanVisible = Visibility.Visible;
-        
         private int _Gain;
         private int _Speed;
         private int _Depth;
@@ -44,36 +41,25 @@ namespace CPI.ViewModels
         private bool _GSM900;
         private bool _DCS1800;
         private bool _PCS1900;
+        private bool _IsEnabled;
+        private bool _IsEnabledSession = true;
+        private UdpClient listener;
+        private Receiver _SelectedReceiver;
         private Unit _SelectedUnit;
         private ARFCN _SelectedARFCN;
+        private BackgroundWorker listenerWorker;
         private ObservableCollection<Unit> _Units;
         private ObservableCollection<Computer> _Computers;
-        private BackgroundWorker listenerWorker;
-        private ObservableCollection<ARFCN> _ListARFCNs;
-        private bool _IsEnabled;
-        private bool _IsEnabledSession=true;
-        private UdpClient listener;
-        private Visibility _MoreVisibility;
-        private Receiver _SelectedReceiver;
+        private ObservableCollection<ARFCN> _ListARFCNs;      
         private ObservableCollection<Receiver> _RxList;
-
         private ObservableCollection<Session> _SessionsList;
-        //private Visibility _SaveVisi = Visibility.Collapsed;
-        //private Visibility _LoadVisi = Visibility.Collapsed;
-        //private Visibility _WarningNSVisibility = Visibility.Collapsed;
-        //private Visibility _DeleteAllSessionsVisibility = Visibility.Collapsed;
-        //private Visibility _DelSelectedSessionVisibility = Visibility.Collapsed;
-
         private Visibility _SaveVisibility = Visibility.Collapsed;
-        
-
-
-
+        private Visibility _IsCancelVisible = Visibility.Collapsed;
+        private Visibility _IsScanVisible = Visibility.Visible;
+        private Visibility _MoreVisibility;
         private string _SessionNameToSave;
         private Session _SelectedSession;
         private Session _SessionToSave;
-
-
 
         #endregion
 
@@ -82,30 +68,16 @@ namespace CPI.ViewModels
         public RelayCommand Save { get; set; }
         public RelayCommand Load { get; set; }
         public RelayCommand CancelSave { get; set; }
-        //public RelayCommand YesSave { get; set; }
-        //public RelayCommand NoSave { get; set; }
-        //public RelayCommand YesLoad { get; set; }
-        //public RelayCommand NoLoad { get; set; }
-        //public RelayCommand OKWarningNS { get; set; }
-        public RelayCommand DeleteAllSessions { get; set; }
-        //public RelayCommand YesDeleteAllSessions { get; set; }
-        //public RelayCommand NoDeleteAllSessions { get; set; }
-        //public RelayCommand DeleteSelectedSession { get; set; }
-        //public RelayCommand YesDelSelectedSession { get; set; }
-        //public RelayCommand NoDelSelectedSession { get; set; }
-
-
-        //public RelayCommand Loaded { get; set; }
-        //public RelayCommand Unloaded { get; set; }
         public RelayCommand Scan { get; set; }
         public RelayCommand Cancel { get; set; }
-        //public RelayCommand History { get; set; }
-        //public RelayCommand AddNew { get; set; }
-
         public RelayCommand ShowARFCN { get; set; }
         public RelayCommand Close { get; private set; }
-        //public RelayCommand Delete { get; private set; }
         public RelayCommand Attach { get; private set; }
+        public RelayCommand Loaded { get; set; }
+        public RelayCommand Unloaded { get; set; }
+        public RelayCommand Delete { get; private set; }
+        public RelayCommand DeleteSelectedSession { get; set; }
+
 
         public ObservableCollection<Unit> Units
         {
@@ -127,15 +99,11 @@ namespace CPI.ViewModels
             }
         }
 
-
         public ObservableCollection<Receiver> RxList
         {
             get
-            {
-                //return _RxList;  
-               return new ObservableCollection<Receiver>(_RxList.Where(s => s.IsAttached==false).ToList());
-              //  return new ObservableCollection<Receiver>(_RxList.Where(s => s.ARFCN_ID == null).ToList());
-
+            { 
+               return new ObservableCollection<Receiver>(_RxList.Where(s => s.IsAttached==false));
             }
             set
             {
@@ -143,7 +111,6 @@ namespace CPI.ViewModels
                 OnPropertyChanged("RxList");
             }
         }
-
 
         public Receiver SelectedReceiver
         {
@@ -153,7 +120,6 @@ namespace CPI.ViewModels
                 _SelectedReceiver = value;
                 Attach.RaiseCanExecuteChanged();
                 OnPropertyChanged("SelectedReceiver");
-                //OnPropertyChanged("SelectedReceiverName");
             }
             
         }
@@ -187,8 +153,6 @@ namespace CPI.ViewModels
                 OnPropertyChanged("SaveVisibility");
             }
         }
-
-        
 
         public int Gain
         {
@@ -323,91 +287,10 @@ namespace CPI.ViewModels
             get { return _SessionsList; }
             set
             {
-
                 _SessionsList = value;
                 OnPropertyChanged("SessionsList");
             }
         }
-
-        //public Visibility SaveVisibility
-        //{
-        //    get { return _SaveVisi; }
-        //    set
-        //    {
-        //        _SaveVisi = value;
-        //        OnPropertyChanged("SaveVisibility");
-        //    }
-        //}
-
-        //public Visibility LoadVisibility
-        //{
-        //    get { return _LoadVisi; }
-        //    set
-        //    {
-        //        _LoadVisi = value;
-        //        OnPropertyChanged("LoadVisibility");
-        //    }
-        //}
-
-        //public Visibility WarningNSVisibility
-        //{
-        //    get { return _WarningNSVisibility; }
-        //    set
-        //    {
-        //        _WarningNSVisibility = value;
-        //        OnPropertyChanged("WarningNSVisibility");
-        //    }
-        //}
-
-        //public Visibility DeleteAllSessionsVisibility
-        //{
-        //    get { return _DeleteAllSessionsVisibility; }
-        //    set
-        //    {
-        //        _DeleteAllSessionsVisibility = value;
-        //        OnPropertyChanged("DeleteAllSessionsVisibility");
-        //    }
-        //}
-
-        //public Visibility DelSelectedSessionVisibility
-        //{
-        //    get { return _DelSelectedSessionVisibility; }
-        //    set
-        //    {
-        //        _DelSelectedSessionVisibility = value;
-        //        OnPropertyChanged("DelSelectedSessionVisibility");
-        //    }
-        //}
-
-        private string _SelectedReceiverName = "NS";
-        public string SelectedReceiverName
-        {
-            get
-            {
-                if (SelectedARFCN != null && _RxList.Count != 0 && SelectedReceiver != null )
-                {
-                    if (SelectedARFCN.RxName != null)
-                    {
-                        SelectedReceiver = _RxList.FirstOrDefault(r => r.Name == SelectedARFCN.RxName);
-
-                        _SelectedReceiverName = SelectedReceiver.Name;
-                    }
-                }
-                else if (_SelectedReceiverName == null)
-                {
-                    _SelectedReceiverName = "NS";
-                }
-                return _SelectedReceiverName;
-            }
-            set
-            {
-                _SelectedReceiverName = value;
-
-                OnPropertyChanged("SelectedReceiverName");
-
-            }
-        }
-
 
         public string SessionNameToSave
         {
@@ -415,7 +298,6 @@ namespace CPI.ViewModels
             set
             {
                 _SessionNameToSave = value;
-               
                 OnPropertyChanged("SessionNameToSave");
                 SaveAs.RaiseCanExecuteChanged();
             }
@@ -427,8 +309,8 @@ namespace CPI.ViewModels
             set
             {
                 _SelectedSession = value;
-                //DeleteSelectedSession.RaiseCanExecuteChanged();
                 Load.RaiseCanExecuteChanged();
+                DeleteSelectedSession.RaiseCanExecuteChanged();
                 OnPropertyChanged("SelectedSession");
              
             }
@@ -450,52 +332,34 @@ namespace CPI.ViewModels
         public ScannerViewModel(IDialogCoordinator instance)
         {
             dialogCoordinator = instance;
-
+            Loaded = new RelayCommand(OnLoaded);
+            Unloaded = new RelayCommand(OnUnloaded);
+            Delete = new RelayCommand(OnDelete);
             Save = new RelayCommand(OnSave);
             SaveAs = new RelayCommand(OnSaveAs, CanSaveAs);
             Load = new RelayCommand(OnLoad, CanLoad);
-            //YesSave = new RelayCommand(OnYesSave);
-            //NoSave = new RelayCommand(OnNoSave);
-            //YesLoad = new RelayCommand(OnYesLoad);
-            //NoLoad = new RelayCommand(OnNoLoad);
-            //OKWarningNS = new RelayCommand(OnOKWarningNS);
-            DeleteAllSessions = new RelayCommand(OnDeleteAllSessions, CanDeleteAllSessions);
-            //YesDeleteAllSessions = new RelayCommand(OnYesDeleteAllSessions);
-            //NoDeleteAllSessions = new RelayCommand(OnNoDeleteAllSessions);
-            //DeleteSelectedSession = new RelayCommand(OnDeleteSelectedSession, CanDeleteSelectedSession);
-            //YesDelSelectedSession = new RelayCommand(OnYesDelSelectedSession);
-            //NoDelSelectedSession = new RelayCommand(OnNoDelSelectedSession);
+            DeleteSelectedSession = new RelayCommand(OnDeleteSelectedSession, CanDeleteSelectedSession);
             CancelSave = new RelayCommand(OnCancelSave);
-
-            //Loaded = new RelayCommand(OnLoaded);
-            //Unloaded = new RelayCommand(OnUnloaded);
             Scan = new RelayCommand(OnScan, CanScan);
             Cancel = new RelayCommand(OnCancel,CanCancel);
-            //History = new RelayCommand(OnHistory);
-            //AddNew = new RelayCommand(OnAddNew);
             ShowARFCN = new RelayCommand(OnShowARFCN);
             Close = new RelayCommand(OnClose);
-            //Delete = new RelayCommand(OnDelete);
             Attach = new RelayCommand(OnAttach, CanAttach);
-            SelectedUnit = new Unit();
-         
+            SelectedUnit = new Unit();         
         }
 
 
 
         public void Initialized()
         {
-
             _ListARFCNs = new ObservableCollection<ARFCN>();
             _ListARFCNs.CollectionChanged += ListARFCNs_CollectionChanged;
-
             listenerWorker = new BackgroundWorker();
             listenerWorker.DoWork += ListenerWorker_DoWork;
             listenerWorker.ProgressChanged += ListenerWorker_ProgressChanged;
             listenerWorker.RunWorkerCompleted += ListenerWorker_RunWorkerCompleted;
             listenerWorker.WorkerReportsProgress = true;
             listenerWorker.WorkerSupportsCancellation = true;
-
 
             IsCancelVisible = Visibility.Collapsed;
             Gain = 24;
@@ -517,16 +381,13 @@ namespace CPI.ViewModels
             OnPropertyChanged("RxList");
 
             IsEnabled = true;
-            MoreVisibility = Visibility.Collapsed;
-           
-         
+            IsEnabledSession = true;
+            MoreVisibility = Visibility.Collapsed;       
 #if (DEBUG)
 #else
 #endif
         }
-
-
-
+        
         #endregion
 
         #region Commands Methods
@@ -534,8 +395,6 @@ namespace CPI.ViewModels
         private void OnAttach()
         {
             Transfer.SelectedARFCN = SelectedARFCN;
-
-
             if (SelectedReceiver.Name == "NS" && !string.IsNullOrEmpty(SelectedARFCN.RxName))
             {
                 _RxList.FirstOrDefault(d => d.Name == SelectedARFCN.RxName).ARFCN_ID = null;
@@ -544,10 +403,6 @@ namespace CPI.ViewModels
                 SelectedReceiver.IsAttached = false;
                 SelectedARFCN.RxName = "";
             }
-            //else if (SelectedReceiver.Name != "NS" && !string.IsNullOrEmpty(SelectedARFCN.RxName) && SelectedReceiver.Name != SelectedARFCN.RxName) //TODO maybe add
-            //{
-            //    WarningNSVisibility = Visibility.Visible;
-            //}
             else if (SelectedReceiver.Name != "NS")
             {
                 SelectedReceiver.ARFCN_ID = SelectedARFCN.ID;
@@ -555,7 +410,7 @@ namespace CPI.ViewModels
                 SelectedARFCN.RxName = SelectedReceiver.Name;
             }
             MoreVisibility = Visibility.Collapsed;
-            SelectedReceiver = null;
+           // SelectedReceiver = null;
             OnPropertyChanged("RxList");
         }
 
@@ -567,13 +422,18 @@ namespace CPI.ViewModels
 
         private void OnClose()
         {
+            if (!String.IsNullOrEmpty( SelectedARFCN.RxName))
+            {
+
+                _RxList.FirstOrDefault(d => d.Name == SelectedARFCN.RxName).IsAttached = true;
+                OnPropertyChanged("RxList");
+            }
             MoreVisibility = Visibility.Collapsed;
         }
 
 
         private void OnShowARFCN()
         {
-          
             if (SelectedARFCN != null)
             {
                 if (SelectedReceiver == null && !string.IsNullOrEmpty(SelectedARFCN.RxName))
@@ -582,224 +442,28 @@ namespace CPI.ViewModels
                     SelectedReceiver.IsAttached = false;
                 }
 
-                if (SelectedARFCN.RxName != null)
+                if (!String.IsNullOrEmpty(SelectedARFCN.RxName))
                 {
-                    //SelectedReceiver = _RxList.FirstOrDefault(d => d.IsAttached == true);
-                    // SelectedReceiver.ARFCN = SelectedARFCN;
-
-                    //Receiver r = _RxList.FirstOrDefault(d => d.ARFCN_ID == SelectedARFCN.ID);//TODO
-
-                    //SelectedReceiver = r;
 
                     SelectedReceiver = _RxList.FirstOrDefault(d => d.Name == SelectedARFCN.RxName);
-
-                    //TODO: Add IsAttached property to the receiver extension and continue with this parameter to hide receiver from RxList 
+                    SelectedReceiver.IsAttached = false;
+                    OnPropertyChanged("RxList");
                 }
-                //OnPropertyChanged("SelectedReceiverName");///
                 MoreVisibility = Visibility.Visible;
             }   
         }
-
-        //private void OnAddNew()
-        //{
-            
-        //}
-
-        private void OnCancel()
-        {
-            Computer cpu = Computers.FirstOrDefault(c => c.Unit_ID == SelectedUnit.ID);
-            if (Scanner.Cancel(cpu))
-            {
-                if (listenerWorker.IsBusy)
-                    listenerWorker.CancelAsync();
-                listener.Close();
-                IsScanVisible = Visibility.Visible;
-                IsCancelVisible = Visibility.Collapsed;
-            }
-        }
-
-        private bool CanScan()
-        {
-            return SelectedUnit != null;
-        }
-
-        private bool CanAttach()
-        {
-            return SelectedReceiver != null;
-        }
-
-       
-        private void OnScan()
-        {
-            ListARFCNs.Clear();
-            TransferDB.ARFCNs.Clear();
-        
-
-            SelectedUnit =Units[0];
-            UpdateBand();
-            Computer cpu = Computers.FirstOrDefault(c => c.Unit_ID == SelectedUnit.ID);
-       
-            if (Scanner.Start(cpu, 1, BroadcastIP, ScannerListenerPort, band, Gain, Speed, sample_rate, 0))
-            {
-              
-                IsScanVisible = Visibility.Collapsed;
-                IsCancelVisible = Visibility.Visible;
-                Cancel.RaiseCanExecuteChanged();
-                if (!listenerWorker.IsBusy)
-                    listenerWorker.RunWorkerAsync(ScannerListenerPort);
-                IsEnabled = false;
-                IsEnabledSession = false;
-            }
-        }
-
-        //private void OnHistory()
-        //{
-        //}
-
-        //private void OnLoaded()
-        //{
-
-        //}
-        //private void OnUnloaded()
-        //{
-
-
-        //}
-
-
-        //private void OnSave()
-        //{
-        //    SaveVisibility = Visibility.Visible;
-        //}
-
-        private bool CanSaveAs()
-        {
-            return (!string.IsNullOrEmpty(SessionNameToSave));        
-        }
-
-        private bool CanCancel()
-        {
-            return IsScanVisible == Visibility.Collapsed;
-        }
-        //private void OnLoad()
-        //{
-        //    LoadVisibility = Visibility.Visible;
-        //}
-
-        private bool CanLoad()
-        {
-            return SelectedSession != null;
-        }
-
-        private bool CanDeleteAllSessions()
-        {
-            return SessionsList.Count > 0;
-        }
-
-        //private void OnYesSave()
-        //{
-        //    SessionToSave = new Session();
-        //    if(ListARFCNs.Count != 0 && !string.IsNullOrEmpty(SessionNameToSave))//TODO add ListARFCNs.Count!=0 &&
-        //    {
-        //       SessionToSave.ID = Guid.NewGuid(); 
-        //        SessionToSave.Name = SessionNameToSave;
-        //        SessionToSave.Date = DateTime.Now;
-        //        SessionsList.Add(SessionToSave);
-
-        //        TransferDB.SessionsList =SessionsList;
-        //        DataDB.AddUpdateSessions();
-        //        foreach (ARFCN ARFCN in ListARFCNs)
-        //        {
-        //            ARFCN.Session_ID = SessionToSave.ID;
-        //        }
-        //        TransferDB.ARFCNs = ListARFCNs;
-        //        DataDB.AddUpdateARFCN(); 
-        //    }
-
-        //    SessionNameToSave = null;
-        //    SaveVisibility = Visibility.Collapsed;
-        //}
-
-        //private void OnNoSave()
-        //{
-        //    SaveVisibility = Visibility.Collapsed;
-        //}
-
-        //private void OnYesLoad()
-        //{
-        //    if (SelectedSession != null) 
-        //    {
-        //        DataDB.UpdateARFCNListBySession(SelectedSession);             
-        //        ListARFCNs = TransferDB.ARFCNs;
-
-        //        SequencingService.SetCollectionSequence(ListARFCNs);
-        //        OnPropertyChanged("ListARFCNs");
-        //    }
-
-        //    LoadVisibility = Visibility.Collapsed;
-        //}
-        //private void OnOKWarningNS()
-        //{
-        //    WarningNSVisibility = Visibility.Collapsed;
-        //}
-
-
-        //private void OnNoLoad()
-        //{
-        //    LoadVisibility = Visibility.Collapsed;
-        //}
-        #endregion
-        //private void OnDeleteAllSessions()
-        //{
-        //    DeleteAllSessionsVisibility = Visibility.Visible;
-        //}
-
-        //private void OnYesDeleteAllSessions()
-        //{            
-        //    TransferDB.SessionsList = SessionsList;
-        //    DataDB.DeleteAllSessions();
-        //    SessionsList.Clear();
-        //    DeleteAllSessionsVisibility = Visibility.Collapsed;
-        //}
-
-        //private void OnNoDeleteAllSessions()
-        //{
-        //    DeleteAllSessionsVisibility = Visibility.Collapsed;
-        //}
-
-        //private void OnDeleteSelectedSession()
-        //{
-        //    DelSelectedSessionVisibility = Visibility.Visible;
-        //}
-
-
-        //private void OnNoDelSelectedSession()
-        //{
-        //    DelSelectedSessionVisibility = Visibility.Collapsed;
-        //}
-
-        //private void OnYesDelSelectedSession()
-        //{
-        //    DataDB.DeleteSelectedSession(SelectedSession);
-        //    SessionsList.Remove(SelectedSession);
-        //    DelSelectedSessionVisibility = Visibility.Collapsed;
-        //}
-
-        //private bool CanDeleteSelectedSession()
-        // {
-        //     return SelectedSession != null;
-        // }
-
 
         private void OnSave()
         {
             SaveVisibility = Visibility.Visible;
         }
+
         private void OnCancelSave()
         {
+            SessionNameToSave = "";
             SaveVisibility = Visibility.Collapsed;
         }
-        
+
 
         private async void OnSaveAs()
         {
@@ -811,7 +475,7 @@ namespace CPI.ViewModels
             if (res == MessageDialogResult.Affirmative)
             {
                 SessionToSave = new Session();
-                if (ListARFCNs.Count != 0 && !string.IsNullOrEmpty(SessionNameToSave))//TODO add ListARFCNs.Count!=0 &&
+                if (ListARFCNs.Count != 0 && !string.IsNullOrEmpty(SessionNameToSave))
                 {
                     SessionToSave.ID = Guid.NewGuid();
                     SessionToSave.Name = SessionNameToSave;
@@ -844,17 +508,23 @@ namespace CPI.ViewModels
                 if (SelectedSession != null)
                 {
                     DataDB.UpdateARFCNListBySession(SelectedSession);
-                    ListARFCNs = TransferDB.ARFCNs;
-
-                    SequencingService.SetCollectionSequence(ListARFCNs);
-                    OnPropertyChanged("ListARFCNs");
+                    ListARFCNs.Clear();
+                    foreach (ARFCN arfcn in TransferDB.ARFCNs)
+                    {
+                        ListARFCNs.Add(arfcn);
+                    } 
+                    
                 }
-
-                //LoadVisibility = Visibility.Collapsed;
             }
         }
 
-        private async void OnDeleteAllSessions()
+
+    
+        private bool CanDeleteSelectedSession()
+        {
+            return SelectedSession != null;
+        }
+        private async void OnDeleteSelectedSession()
         {
             var res = await ShowMessageAsync("Delete?", "Are you sure? Delete all sessions", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings
             {
@@ -862,18 +532,85 @@ namespace CPI.ViewModels
             });
             if (res == MessageDialogResult.Affirmative)
             {
-                if (SelectedSession != null)
-                {
-                    DataDB.UpdateARFCNListBySession(SelectedSession);
-                    ListARFCNs = TransferDB.ARFCNs;
+                DataDB.DeleteSelectedSession(SelectedSession);
+                SessionsList.Remove(SelectedSession);
+            }
+        }
+        private void OnScan()
+        {
+            ListARFCNs.Clear();
+            //TransferDB.ARFCNs.Clear();
+            SelectedUnit = Units[0];
+            UpdateBand();
+            Computer cpu = Computers.FirstOrDefault(c => c.Unit_ID == SelectedUnit.ID);
 
-                    SequencingService.SetCollectionSequence(ListARFCNs);
-                    OnPropertyChanged("ListARFCNs");
-                }
+            if (Scanner.Start(cpu, 1, BroadcastIP, ScannerListenerPort, band, Gain, Speed, sample_rate, 0))
+            {
 
+                IsScanVisible = Visibility.Collapsed;
+                IsCancelVisible = Visibility.Visible;
+                Cancel.RaiseCanExecuteChanged();
+                if (!listenerWorker.IsBusy)
+                    listenerWorker.RunWorkerAsync(ScannerListenerPort);
+                IsEnabled = false;
+                IsEnabledSession = false;
             }
         }
 
+        private void OnLoaded()
+        {
+
+        }
+        private void OnUnloaded()
+        {
+
+        }
+
+
+        private void OnCancel()
+        {
+            Computer cpu = Computers.FirstOrDefault(c => c.Unit_ID == SelectedUnit.ID);
+            if (Scanner.Cancel(cpu))
+            {
+                if (listenerWorker.IsBusy)
+                    listenerWorker.CancelAsync();
+                listener.Close();
+                IsScanVisible = Visibility.Visible;
+                IsCancelVisible = Visibility.Collapsed;
+            }
+        }
+
+        private bool CanScan()
+        {
+            return SelectedUnit != null;
+        }
+
+        private bool CanAttach()
+        {
+            return SelectedReceiver != null;
+        }
+        
+        private bool CanSaveAs()
+        {
+            return ListARFCNs.Count > 0 && !string.IsNullOrEmpty(SessionNameToSave);        
+        }
+
+        private bool CanCancel()
+        {
+            return IsScanVisible == Visibility.Collapsed;
+        }
+       
+
+        private bool CanLoad()
+        {
+            return SelectedSession != null;
+        }
+
+        private bool CanDeleteAllSessions()
+        {
+            return SessionsList.Count > 0;
+        }
+      
 
         #region Listener Worker
         private void ListenerWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -963,12 +700,9 @@ namespace CPI.ViewModels
             IsCancelVisible = Visibility.Collapsed;
         }
         #endregion
-
-
-
+        
         #region General Methods
-
-
+        
         private void UpdateBand()
         {
             if (GSM850)
@@ -1002,34 +736,15 @@ namespace CPI.ViewModels
         {
             SequencingService.SetCollectionSequence(ListARFCNs);
         }
-        //private async void ShowMessageAsync(string header, string message, MessageDialogStyle dialogStyle)
-        //{
-        //    var settings = new MetroDialogSettings
-        //    {
-        //        AnimateShow = false
-        //    };
-        //    await dialogCoordinator.ShowMessageAsync(this, header, message, dialogStyle, settings);
-        //}
-        //public async static Task<MessageDialogResult> ShowMessageAsync(string title, string Message, MessageDialogStyle style = MessageDialogStyle.Affirmative, MetroDialogSettings settings = null)
-        //{
-        //    if (settings == null)
-        //        settings = new MetroDialogSettings
-        //        {
-        //            AnimateShow = false
-        //        };
-        //    return await ((MetroWindow)(Application.Current.MainWindow)).ShowMessageAsync(title, Message, style, settings);
-        //}
-
-        #endregion
-
-
-        
 
         public async static Task<MessageDialogResult> ShowMessageAsync(string title, string Message, MessageDialogStyle style = MessageDialogStyle.Affirmative, MetroDialogSettings settings = null)
         {
             return await ((MetroWindow)(Application.Current.MainWindow)).ShowMessageAsync(title, Message, style, settings);
         }
-     
+
+        #endregion
+
 
     }
+    #endregion
 }

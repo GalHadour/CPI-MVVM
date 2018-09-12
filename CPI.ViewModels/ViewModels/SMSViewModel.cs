@@ -5,13 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CPI.ViewModels.ViewModels
+namespace CPI.ViewModels
 {
-   public class SMSViewModel
+   public class SMSViewModel :ViewModelBase
     {
+        #region Fields
         private bool _Sender;
         private bool _Band;
         private bool _ARFCN;
+        #endregion
+
+        #region Properties
         public bool Sender
         {
             get { return _Sender; }
@@ -47,11 +51,13 @@ namespace CPI.ViewModels.ViewModels
         {
             Sender = true;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+        #endregion
+
+        #region Constructor
+        #endregion
+
+        #region Commands Methods
+        #endregion
+
     }
 }

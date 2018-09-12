@@ -1,4 +1,5 @@
-﻿using CPI.ViewModels.ViewModels;
+﻿using CPI.ViewModels;
+using CPIViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

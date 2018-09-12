@@ -12,8 +12,10 @@ namespace CPI.DTO
         public static ARFCN SelectedARFCN { get; set; }
         public static Unit SelectedUnit { get; set; }
         public static HamburgerMenu HamburgerMenuControl { get; set; }
+        public static string VideoMachineId { get; internal set; }
 
-  
+
+
 
         //GAL
         public static UnitView SelectedUnitView { get; set; }

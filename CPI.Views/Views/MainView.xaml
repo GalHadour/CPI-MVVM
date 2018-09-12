@@ -117,7 +117,7 @@
                         Icon="{iconPacks:Material Kind=Settings}" 
                         ToolTip="{DynamicResource OPTIONS}" Label="{DynamicResource OPTIONS}">
                         <local:CustomMenuIconItem.Tag>
-                            <local:OptionsView />
+                            <local:SettingsView />
                         </local:CustomMenuIconItem.Tag>
                     </local:CustomMenuIconItem>
 

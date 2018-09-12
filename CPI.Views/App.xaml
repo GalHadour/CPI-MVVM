@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CPI.Views"
              xmlns:viewModels="clr-namespace:CPI.ViewModels;assembly=CPI.ViewModels"
+             
              x:Class="CPI.Views.App"
              
              StartupUri="Windows/MainWindow.xaml">
@@ -43,8 +44,6 @@
 
             </ResourceDictionary.MergedDictionaries>
 
-
-           
 
 
 

@@ -28,7 +28,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -42,20 +41,21 @@
             <TextBlock Text="BAND"   Style="{StaticResource GroupBoxHeaderTextBlockStyle}" Margin="10,5,10,0" />
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="90*"/>
+                    <ColumnDefinition Width="89*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <RadioButton Grid.Row="0" Grid.Column="0" Content="GSM850"  IsChecked="{Binding Path=GSM850}" FontSize="16" Margin="0,0,0,2" IsEnabled="{Binding Path=IsEnabled}"/>
-                <RadioButton Grid.Row="1" Grid.Column="0" Content="GSM900"  IsChecked="{Binding Path=GSM900}" FontSize="16" IsEnabled="{Binding Path=IsEnabled}"/>
-                <RadioButton Grid.Row="0" Grid.Column="1" Content="DCS1800" IsChecked="{Binding Path=DCS1800}" FontSize="16" IsEnabled="{Binding Path=IsEnabled}" />
-                <RadioButton Grid.Row="1" Grid.Column="1" Content="PCS1900" IsChecked="{Binding Path=PCS1900}" FontSize="16"  IsEnabled="{Binding Path=IsEnabled}"/>
-                <Button Grid.Row="1" Grid.Column="2" Margin="5"  Content="SCAN"  Command="{Binding Path=Scan}" VerticalAlignment="Bottom"  Visibility="{Binding Path=IsScanVisible}" ToolTip="Start scanning" />
-                <Button Grid.Row="1" Grid.Column="2" Margin="5"  Content="CANCEL" Command="{Binding Path=Cancel}" VerticalAlignment="Bottom"   Visibility="{Binding Path=IsCancelVisible, FallbackValue=collapsed}" ToolTip="Cancel scanning"/>
+                <RadioButton Grid.Row="0" Grid.Column="0" Content="GSM850"  IsChecked="{Binding Path=GSM850}" FontSize="16" Margin="0,0,0,2" IsEnabled="{Binding Path=IsEnabled}" Grid.ColumnSpan="2"/>
+                <RadioButton Grid.Row="1" Grid.Column="0" Content="GSM900"  IsChecked="{Binding Path=GSM900}" FontSize="16" IsEnabled="{Binding Path=IsEnabled}" Grid.ColumnSpan="2"/>
+                <RadioButton Grid.Row="0" Grid.Column="2" Content="DCS1800" IsChecked="{Binding Path=DCS1800}" FontSize="16" IsEnabled="{Binding Path=IsEnabled}" />
+                <RadioButton Grid.Row="1" Grid.Column="2" Content="PCS1900" IsChecked="{Binding Path=PCS1900}" FontSize="16"  IsEnabled="{Binding Path=IsEnabled}"/>
+                <Button Grid.Row="1" Grid.Column="3" Margin="5,0,4,5"  Content="SCAN"  Command="{Binding Path=Scan}" VerticalAlignment="Bottom"  Visibility="{Binding Path=IsScanVisible}" ToolTip="Start scanning" />
+                <Button Grid.Row="1" Grid.Column="3" Margin="5,0,4,5"  Content="CANCEL" Command="{Binding Path=Cancel}" VerticalAlignment="Bottom"   Visibility="{Binding Path=IsCancelVisible, FallbackValue=collapsed}" ToolTip="Cancel scanning"/>
             </Grid>
         </StackPanel>
         <StackPanel  Grid.Row="2" Grid.Column="2" Background="{StaticResource GroupBoxBackground}" Margin="5" >
@@ -103,7 +103,7 @@
                 <Label Grid.Column="2" Grid.Row="1" Content="HIGH" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="11" Padding="5,0" Foreground="#FF727478"/>
             </Grid>
         </StackPanel>
-        <Grid Grid.Column="5" Grid.Row="2" Background="{StaticResource GroupBoxBackground}" IsEnabled="{Binding IsEnabledSession}">
+        <Grid Grid.Column="5" Grid.Row="2" Background="{StaticResource GroupBoxBackground}" IsEnabled="{Binding IsEnabledSession}" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -127,9 +127,11 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button  Grid.Column="0" Grid.Row="2" Content="SAVE"  Command="{Binding Path=Save}" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Save current session"/>
-            <Button Grid.Column="1" Grid.Row="2" Content="DEL ALL"  Command="{Binding Path=DeleteAllSessions}" Margin="5" ToolTip="Delete all Sessions"/>
-            <Button Grid.Column="2" Grid.Row="2" Content="LOAD" Margin="5"  Command="{Binding Path=Load}" ToolTip="Load current session" />
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Right">
+                <Button  Content="SAVE" Margin="1,5,5,5" Command="{Binding Path=Save}"  ToolTip="Save current session"/>
+                <Button Content="DELETE" Margin="1,5,5,5" Command="{Binding Path=DeleteSelectedSession}"  ToolTip="Delete selected session" />
+                <Button Content="LOAD" Margin="1,5,10,5"   Command="{Binding Path=Load}" ToolTip="Load current session"  HorizontalAlignment="Right" />
+            </StackPanel>
         </Grid>
         <DataGrid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Margin="5" 
                   ItemsSource="{Binding Path=ListARFCNs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -169,7 +171,6 @@
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="ARFCN INFO" Style="{StaticResource GroupBoxHeaderTextBlockStyle}" Foreground="White" VerticalAlignment="Center"  FontSize="16"/>
-
                     <Grid Grid.Row="1" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0"/>
@@ -206,7 +207,6 @@
                         <TextBox Text="{Binding Path=SelectedARFCN.Power}" Grid.Row="1" Grid.Column="5" FontSize="15" Height="30" />
                         <TextBlock Text="{DynamicResource Frequency}" Grid.Row="0" Grid.Column="7" Margin="0,0" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Bottom"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.Frequency}" Grid.Row="1" Grid.Column="7" FontSize="15" Height="30" />
-
                         <TextBlock Text="{DynamicResource MCC}" Grid.Row="2" Grid.Column="1"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.MCC}" Grid.Row="3" Grid.Column="1" FontSize="15" Height="30"/>
                         <TextBlock Text="{DynamicResource MNC}" Grid.Row="2" Grid.Column="3" Margin="0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
@@ -215,28 +215,22 @@
                         <TextBox Text="{Binding Path=SelectedARFCN.LAC}" Grid.Row="3" Grid.Column="5" FontSize="15" Height="30"/>
                         <TextBlock Text="{DynamicResource CI}" Grid.Row="2" Grid.Column="7" Margin="0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.CI}" Grid.Row="3" Grid.Column="7" FontSize="15" Height="30" />
-
                         <TextBlock Text="{DynamicResource CellARFCNs}" Grid.Row="4" Grid.Column="1"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.CellARFCNs}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" Height="30" />
                         <TextBlock Text="{DynamicResource Configuration}" Grid.Row="4" Grid.Column="5" Margin="0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.Configuration}" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="1" FontSize="15" Height="30" />
-
                         <TextBlock Text="SC UMTS" Grid.Row="4" Grid.Column="7" Margin="0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.SC}" Grid.Row="5" Grid.Column="7" Grid.ColumnSpan="1" FontSize="15"/>
-
                         <TextBlock Text="{DynamicResource NeighbourCells}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="7"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.NeighbourCells}" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="7" Margin="0,0,0,0" FontSize="15" Height="30"/>
-
                         <TextBlock Text="{DynamicResource NetworkProvider}" Grid.Row="8" Grid.Column="1"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.NetworkProvider}" Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="3"  FontSize="15" Height="30" />
                         <TextBlock Text="{DynamicResource Operator}" Grid.Row="10" Grid.Column="1"  Grid.ColumnSpan="3" Margin="0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.Operator}" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" FontSize="16" Height="30" />
                         <TextBlock Text="{DynamicResource Country}" Grid.Row="8" Grid.Column="5" Margin="0,0"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <TextBox Text="{Binding Path=SelectedARFCN.Country}" Grid.Row="9" Grid.Column="5"  FontSize="16" Height="30" />
-                       
                         <TextBlock Text="{DynamicResource Receiver}" Grid.Row="10" Grid.Column="5" Margin="0,0"   VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <ComboBox Grid.Row="11" Grid.Column="5"  FontSize="16" Height="30" DisplayMemberPath="Name" IsEditable="True"   ItemsSource="{Binding RxList}"  SelectedItem="{Binding SelectedReceiver}" />
-
                         <TextBlock Text="{DynamicResource ProviderLogo}" Grid.Row="8" Grid.Column="7" Margin="0,0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{DynamicResource GroupBoxHeaderTextBlockStyle}"/>
                         <Border Grid.Row="9" Grid.Column="7" Grid.RowSpan="3" BorderThickness="1" BorderBrush="#FF878686">
                             <Image RenderOptions.BitmapScalingMode="Fant"  Margin="5"/>
@@ -251,65 +245,8 @@
                 </Grid>
             </Border>
         </Grid>
-
-        <!--<Grid  Visibility="{Binding SaveVisibility,FallbackValue=Collapsed}"  Grid.ColumnSpan="7" Grid.RowSpan="5" >
-            <Grid Background="White" Opacity="0.2"/>
-            <Border Height="130" Width="300"  Background="{StaticResource GroupBoxBackground}">
-                <StackPanel>
-                    <TextBlock HorizontalAlignment="Center"  Text="Are you sure you want save?"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}"  Margin="10,5,10,0"/>
-                    <Button   Content="YES" Command="{Binding Path=YesSave}" Margin="10,10"  />
-                    <Button  Content="NO" Command="{Binding Path=NoSave}" Margin="10,10"  />
-                    </StackPanel>
-            </Border>
-        </Grid>
-
-        <Grid  Visibility="{Binding LoadVisibility,FallbackValue=Collapsed}"  Grid.ColumnSpan="7" Grid.RowSpan="5" >
-            <Grid Background="White" Opacity="0.2"/>
-            <Border Height="130" Width="550"  Background="{StaticResource GroupBoxBackground}">
-                <StackPanel>
-                    <TextBlock HorizontalAlignment="Center"   Text="Are you sure you want to delete ARFCN's table and load from history?"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}"  Margin="10,5,10,0"/>
-                    <Button   Content="YES" Command="{Binding Path=YesLoad}" Margin="10,10"  />
-                    <Button  Content="NO" Command="{Binding Path=NoLoad}" Margin="10,10"  />
-                </StackPanel>
-            </Border>
-        </Grid>
-
-        <Grid  Visibility="{Binding WarningNSVisibility, FallbackValue=collapsed}"  Grid.ColumnSpan="7" Grid.RowSpan="5" >
-            <Grid Background="White" Opacity="0.2"/>
-            <Border Height="80" Width="370"  Background="{StaticResource GroupBoxBackground}">
-                <StackPanel>
-                    <TextBlock HorizontalAlignment="Center"   Text="You have to select NS before switching receiver!"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}"  Margin="10,5,10,0"/>
-                    <Button   Content="OK" Command="{Binding Path=OKWarningNS}" Margin="10,10"  />
-                </StackPanel>
-            </Border>
-        </Grid>
-
-        <Grid  Visibility="{Binding DeleteAllSessionsVisibility, FallbackValue=collapsed}"  Grid.ColumnSpan="7" Grid.RowSpan="5" >
-            <Grid Background="White" Opacity="0.2"/>
-            <Border Height="130" Width="400"  Background="{StaticResource GroupBoxBackground}">
-                <StackPanel>
-                    <TextBlock HorizontalAlignment="Center"   Text="Are you sure you want to delete all sessions's history?"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}"  Margin="10,5,10,0"/>
-                    <Button   Content="YES" Command="{Binding Path=YesDeleteAllSessions}" Margin="10,10"  />
-                    <Button  Content="NO" Command="{Binding Path=NoDeleteAllSessions}" Margin="10,10"  />
-                </StackPanel>
-            </Border>
-        </Grid>
-
-        <Grid  Visibility="{Binding DelSelectedSessionVisibility, FallbackValue=collapsed}"  Grid.ColumnSpan="7" Grid.RowSpan="5" >
-            <Grid Background="White" Opacity="0.2"/>
-            <Border Height="130" Width="400"  Background="{StaticResource GroupBoxBackground}">
-                <StackPanel>
-                    <TextBlock HorizontalAlignment="Center"   Text="Are you sure you want to delete the selected session?"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}"  Margin="10,5,10,0"/>
-                    <Button   Content="YES" Command="{Binding Path=YesDelSelectedSession}" Margin="10,10"  />
-                    <Button  Content="NO" Command="{Binding Path=NoDelSelectedSession}" Margin="10,10"  />
-                </StackPanel>
-            </Border>
-        </Grid>-->
-
-
         <Grid  Visibility="{Binding SaveVisibility,FallbackValue=collapsed}"  Grid.ColumnSpan="7" Grid.RowSpan="5" >
             <Grid Background="White" Opacity="0.2"/>
-          
             <Border Height="120" Width="400"  Background="{StaticResource GroupBoxBackground}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -326,7 +263,6 @@
                     <Button Grid.Row="1" Grid.Column="2" Content="CANCEL"  Command="{Binding Path=CancelSave}" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
             </Border>
-        </Grid> 
-
+        </Grid>
     </Grid>
 </UserControl>

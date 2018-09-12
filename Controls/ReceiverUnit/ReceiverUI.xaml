@@ -234,18 +234,16 @@
         <StackPanel Grid.Row="3" Grid.Column="1"  Background="#FF2F2F2F">
             <Grid  Margin="10,5,10,10"  >
                 <Grid.ColumnDefinitions>
-
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="SCANNER"  Grid.Column="0" Grid.Row="0"  Style="{StaticResource GroupBoxHeaderTextBlockStyle}" VerticalAlignment="Bottom"/>
-                <Button  Grid.Column="1" Grid.Row="1" Content="START" Command="{Binding Path=StartScan, ElementName=StopScanVisibility}"  VerticalAlignment="Bottom"  Background="#FF2F2F2F"/>
-                <Button  Grid.Column="2" Grid.Row="2" Content="STOP" Command="{Binding Path=StopScan, ElementName=StopScanVisibility}" VerticalAlignment="Bottom" Visibility="{Binding Path=StopScanVisibility, ElementName=ReceiverUIClass, FallbackValue=collapsed}" Background="#FF2F2F2F"/>
+                <Button  Grid.Column="0" Grid.Row="2" Content="START" Command="{Binding Path=StartScan, ElementName=ReceiverUIClass}"  VerticalAlignment="Bottom"  Background="#FF2F2F2F" Visibility="{Binding Path=StartScanVisibility, ElementName=ReceiverUIClass}"/>
+                <Button  Grid.Column="0" Grid.Row="2" Content="STOP" Command="{Binding Path=StopScan, ElementName=ReceiverUIClass}" VerticalAlignment="Bottom" Visibility="{Binding Path=StopScanVisibility, ElementName=ReceiverUIClass, FallbackValue=collapsed}" Background="#FF2F2F2F"/>
 
 
             </Grid>
