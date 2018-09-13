@@ -70,9 +70,10 @@
                   CanUserReorderColumns="False" CanUserSortColumns="True"  SelectedItem="{Binding SelectedCall}" 
                   ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" FontSize="15">
             <DataGrid.Columns>
+                <!--TODO Change ARFCN.BAND ARFCN.Chanel--> 
                 <DataGridTextColumn Binding="{Binding SequenceNumber}" Header="{iconPacks:Material Kind=Sort,Rotation=180}"  Width="50"/>
-                <DataGridTextColumn Binding="{Binding Band}"        Header="BAND"           Width="0.4*" />
-                <DataGridTextColumn Binding="{Binding ARFCN}"       Header="ARFCN"          Width="0.3*" />
+                <DataGridTextColumn Binding="{Binding ARFCN.Band}"        Header="BAND"           Width="0.4*" />
+                <DataGridTextColumn Binding="{Binding ARFCN.Chanel}"       Header="ARFCN"          Width="0.3*" />
                 <DataGridTextColumn Binding="{Binding Kc}"          Header="KC"             Width=".65*" />
                 <DataGridTextColumn Binding="{Binding Rate}"        Header="RATE"           Width="0.2*" />
                 <DataGridTextColumn Binding="{Binding TS}"          Header="TS"             Width="0.1*" />

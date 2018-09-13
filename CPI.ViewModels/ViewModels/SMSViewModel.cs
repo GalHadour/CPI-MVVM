@@ -20,7 +20,9 @@ namespace CPI.ViewModels
         private string _SearchWord;
        private ObservableCollection<SMS> _SMSs { get; set; }
         private ObservableCollection<String> _SearchHistory { get; set; }
-       
+
+        //private ObservableCollection<ARFCN> _ARFCNs { get; set; }
+
         #endregion
 
         #region Properties
@@ -76,7 +78,20 @@ namespace CPI.ViewModels
             }
         }
 
-        public ObservableCollection<String> SearchHistory
+        //public ObservableCollection<ARFCN> ARFCNs
+        //{
+        //    get
+        //    {
+        //        return _ARFCNs;
+        //    }
+        //    set
+        //    {
+        //        _ARFCNs = value;
+        //        OnPropertyChanged("ARFCNs");
+        //    }
+        //}
+
+        public ObservableCollection<String> SearchHistory//TODO check if the list in combobox is ok
         {
             get
             {
@@ -84,23 +99,29 @@ namespace CPI.ViewModels
               
                     if (Sender)
                     {
-                        foreach(SMS sms in _SMSs)
-                        {
-                            _SearchHistory.Add(sms.Sender);
-                        }
+                    foreach (SMS sms in _SMSs)
+                    {
+                        if (!String.IsNullOrEmpty(sms.Sender))
+                            if (!_SearchHistory.Contains(sms.Sender))
+                                 _SearchHistory.Add(sms.Sender);
+                    }
                     }
                     else if (ARFCN)
                     {
                     foreach (SMS sms in _SMSs)
                     {
-                        _SearchHistory.Add(sms.Kc);
+                        if(sms.ARFCN!=null)
+                            if (!String.IsNullOrEmpty(sms.ARFCN.Chanel.ToString()) && !_SearchHistory.Contains(sms.ARFCN.Chanel.ToString()))
+                                  _SearchHistory.Add(sms.ARFCN.Chanel.ToString());
                     }
                 }
                     else if (Band)
                     {
                     foreach (SMS sms in _SMSs)
                     {
-                        _SearchHistory.Add(sms.Length);
+                        if (sms.ARFCN!=null)
+                            if (!String.IsNullOrEmpty(sms.ARFCN.Band) && !_SearchHistory.Contains(sms.ARFCN.Band))
+                                   _SearchHistory.Add(sms.ARFCN.Band);
                     }
                 }
                     else
@@ -120,6 +141,8 @@ namespace CPI.ViewModels
 
 
         public RelayCommand Search { get; set; }
+        public RelayCommand ResetSearch { get; set; }
+        
 
         public string SearchWord
         {
@@ -134,13 +157,25 @@ namespace CPI.ViewModels
         #endregion
 
         #region Constructor
-        public void Initialized()//TODO change to ctor
+        public void Initialized()//TODO change to ctor  and check where to take sms from arfcns or SMS
         {
             Search = new RelayCommand(OnSearch);
+            ResetSearch = new RelayCommand(OnResetSearch);
             SMSs = new ObservableCollection<SMS>();
-            
-             SMSs = TransferDB.SMSs;
+
+            //_ARFCNs = TransferDB.ARFCNs;
+            //foreach(ARFCN arfcn in _ARFCNs)          
+            //{
+            //    if(arfcn!=null)
+            //    {
+            //        SMSs.Union(arfcn.SMS);
+            //    }
+            //}
+
+            SMSs = TransferDB.SMSs;
             SequencingService.SetCollectionSequence(SMSs);
+
+
             //_SMSs.CollectionChanged += _SMSs_CollectionChanged;
 
 
@@ -158,22 +193,25 @@ namespace CPI.ViewModels
         //}
 
 
-        public void OnSearch()
+        public void OnSearch()//TODO check ARFCN and BAND
         {
            
             if (SearchWord != null)
             {
                 if (Sender)
                 {
-                    _SMSs = new ObservableCollection<SMS>(_SMSs.Where(s => s.Sender == SearchWord));//TODO CHECK
+                    _SMSs = new ObservableCollection<SMS>(_SMSs.Where(s => s.Sender == SearchWord));
+                    //_SMSs.GroupBy(x => x.Sender).Select(x => x.First());
                 }
                 else if (ARFCN)
                 {
-                    _SMSs = new ObservableCollection<SMS>(_SMSs.Where(s => s.Kc == SearchWord));
+                    _SMSs = new ObservableCollection<SMS>(_SMSs.Where(s => s.ARFCN.Chanel.ToString() == SearchWord));
+                    //_SMSs.GroupBy(x =>x.ARFCN.Chanel.ToString().Select(x => x.First());
                 }
                 else if (Band)
                 {
-                    _SMSs = new ObservableCollection<SMS>(_SMSs.Where(s => s.Length == SearchWord));
+                    _SMSs = new ObservableCollection<SMS>(_SMSs.Where(s =>s.ARFCN!=null && s.ARFCN.Band == SearchWord));
+                    //_SMSs.GroupBy(x => x.ARFCN.Band).Select(x => x.First());
                 }
                 else
                 {
@@ -183,6 +221,21 @@ namespace CPI.ViewModels
                 OnPropertyChanged("SMSs");
             }
 
+        }
+
+        public void OnResetSearch()
+        {
+            SearchWord = null;
+            //foreach (ARFCN arfcn in _ARFCNs)
+            //{
+            //    if (arfcn != null)
+            //    {
+            //        SMSs.Union(arfcn.SMS);
+            //    }
+            //}
+
+            SMSs = TransferDB.SMSs;
+            SequencingService.SetCollectionSequence(SMSs);
         }
         #endregion
 

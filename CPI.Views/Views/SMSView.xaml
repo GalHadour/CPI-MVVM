@@ -69,7 +69,10 @@
                   CanUserReorderColumns="False" CanUserSortColumns="True"  SelectedItem="{Binding SelectedSMS}" 
                   ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" FontSize="15">
             <DataGrid.Columns>
+                <!--TODO Change ARFCN.BAND ARFCN.Chanel remove lines-->
                 <DataGridTextColumn Binding="{Binding SequenceNumber}"  Header="{iconPacks:Material Kind=Sort,Rotation=180}"  Width="50"/>
+                <DataGridTextColumn Binding="{Binding ARFCN.Band}"          Header="BAND"             Width="0.4*" />
+                <DataGridTextColumn Binding="{Binding ARFCN.Chanel}"          Header="ARFCN"             Width="0.3*" />
                 <DataGridTextColumn Binding="{Binding Sender}"          Header="SENDER"             Width="0.6*" />
                 <DataGridTextColumn Binding="{Binding Kc}"              Header="KC"                 Width=".6*" />
                 <DataGridTextColumn Binding="{Binding TS}"              Header="TS"                 Width="0.2*" />
