@@ -34,6 +34,8 @@ namespace CPI.ViewModels
                     TransferDB.Computers = new ObservableCollection<Computer>(collection[5] as List<Computer>);
                     TransferDB.Receivers = new ObservableCollection<Receiver>(collection[6] as List<Receiver>);
                     TransferDB.SessionsList= new ObservableCollection<Session>(collection[7] as List<Session>);
+                    TransferDB.SMSs = new ObservableCollection<SMS>(collection[8] as List<SMS>);
+                    TransferDB.Calls = new ObservableCollection<Call>(collection[9] as List<Call>);
                 }
             };
             worker.RunWorkerAsync();
@@ -108,6 +110,16 @@ namespace CPI.ViewModels
               DatabaseService.Delete<Session>(session);
         }
 
+
+        public static int AddUpdateSMSs()
+        {
+            return DatabaseService.AddOrUpdate(new List<SMS>(TransferDB.SMSs));
+        }
+
+        public static int AddUpdateCalls()
+        {
+            return DatabaseService.AddOrUpdate(new List<Call>(TransferDB.Calls));
+        }
         #endregion
 
     }

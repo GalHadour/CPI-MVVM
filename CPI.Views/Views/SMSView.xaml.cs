@@ -1,4 +1,5 @@
 ﻿using CPI.ViewModels;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,14 @@ namespace CPI.Views
     /// </summary>
     public partial class SMSView : UserControl
     {
+
+       private SMSViewModel SmsViewModel = new SMSViewModel();
         public SMSView()
         {
             InitializeComponent();
-            this.DataContext = new SMSViewModel();
+            this.DataContext = SmsViewModel;
+
+            SmsViewModel.Initialized();
         }
     }
 }

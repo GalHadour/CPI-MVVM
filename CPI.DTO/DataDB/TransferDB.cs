@@ -15,6 +15,9 @@ namespace CPI.DTO
         public static ObservableCollection<Receiver> Receivers { get; set; }
 
         public static ObservableCollection<Session> SessionsList { get; set; }
-        
+
+
+        public static ObservableCollection<SMS> SMSs { get; set; }
+        public static ObservableCollection<Call> Calls { get; set; }
     }
 }

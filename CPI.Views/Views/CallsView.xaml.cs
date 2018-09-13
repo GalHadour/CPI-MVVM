@@ -22,10 +22,13 @@ namespace CPI.Views
     /// </summary>
     public partial class CallsView : UserControl
     {
+
+         private CallsViewModel CallsViewModel = new CallsViewModel();
         public CallsView()
         {
             InitializeComponent();
-            this.DataContext = new CallsViewModel();
+            this.DataContext = CallsViewModel;
+            CallsViewModel.Initialized();
         }
     }
 }

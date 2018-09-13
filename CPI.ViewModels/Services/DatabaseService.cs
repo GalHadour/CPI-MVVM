@@ -309,7 +309,9 @@ namespace CPI.ViewModels
                         dbContext.sp_GetAllUnit().ToList(),
                         dbContext.sp_GetAllComputers().ToList(),
                         dbContext.sp_GetAllReceivers().ToList(),
-                        dbContext.sp_GetAllSessions().ToList()
+                        dbContext.sp_GetAllSessions().ToList(),
+                        dbContext.sp_GetAllSMS().ToList(),
+                        dbContext.sp_GetAllCalls().ToList()
                     };
                     return stuff;
                 }

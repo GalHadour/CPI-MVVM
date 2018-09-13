@@ -10,7 +10,7 @@ namespace CPI.Views
     public partial class ScannerView : UserControl
     {
 
-        ScannerViewModel ViewModel = new ScannerViewModel(DialogCoordinator.Instance);
+       private ScannerViewModel ViewModel = new ScannerViewModel(DialogCoordinator.Instance);
         public ScannerView()
         {
             InitializeComponent();

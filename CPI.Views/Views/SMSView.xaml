@@ -48,7 +48,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <ComboBox  VerticalAlignment="Center" FontSize="16" Height="30" IsEditable="True"
-                           ItemsSource="{Binding Path=SearchHistory}" SelectedItem="{Binding Path=SearchWord}"/>
+                           ItemsSource="{Binding Path=SearchHistory}" SelectedItem="{Binding Path=SearchWord, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Button Grid.Column="2" Width="30" Command="{Binding Path=Search}" 
                         Content="{iconPacks:PackIcon {x:Static iconPacks:PackIconMaterialKind.Magnify}}" />
